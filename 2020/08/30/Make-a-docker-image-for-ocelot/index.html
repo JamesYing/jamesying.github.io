@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>给Ocelot打造一个Docker镜像 | James&#39;s Blog -- 脑洞的蜂蜜</title>
+  <meta name="keywords" content=" Asp.Net Core , Kestrel , .Net Core ">
+  <meta name="description" content="给Ocelot打造一个Docker镜像 | James&#39;s Blog -- 脑洞的蜂蜜">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="自我介绍  十年的开发经验和项目管理经验，具有较强的编程能力和逻辑分析能力，对.Net， .Net Core, Java有一定的了解和接触。多年的经验，接触过各类的项目架构，单体架构、分布式架构、SOA、微服务架构等等。能够按照项目需求，能够及时对产品进行分析，并分配研发工作。在团队中能做一定的技术指导，对于一些线上问题，都能及时找到解决方案并解决。 先后曾任职于5173、盛大文学、IPS、百强旅">
+<meta property="og:type" content="website">
+<meta property="og:title" content="关于我-脑洞的蜂蜜">
+<meta property="og:url" content="http://www.jamesying.com/about/index.html">
+<meta property="og:site_name" content="James&#39;s Blog -- 脑洞的蜂蜜">
+<meta property="og:description" content="自我介绍  十年的开发经验和项目管理经验，具有较强的编程能力和逻辑分析能力，对.Net， .Net Core, Java有一定的了解和接触。多年的经验，接触过各类的项目架构，单体架构、分布式架构、SOA、微服务架构等等。能够按照项目需求，能够及时对产品进行分析，并分配研发工作。在团队中能做一定的技术指导，对于一些线上问题，都能及时找到解决方案并解决。 先后曾任职于5173、盛大文学、IPS、百强旅">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-09-30T05:35:41.000Z">
+<meta property="article:modified_time" content="2020-09-30T12:28:35.633Z">
+<meta property="article:author" content="脑洞的蜂蜜">
+<meta property="article:tag" content="架构师 重构师 面对未知勇于挑战">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/fav.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-dark.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/header.jpg" />
+</a>
+<div class="author">
+    <span>脑洞的蜂蜜</span>
+</div>
+<div class="desc">
+    <span>
+        胜寒会员，从事Asp.Net开发13年，先后曾任职于5173、盛大文学、IPS、百强旅游公司，Softtek担任技术开发工作，目前就职于【华住集团】，担任架构师，为易系列.Net 产品负责研发工作。开源项目“微信快速开发框架”负责人，目前正在研究.Net Core与微服务架构。
+    </span>
+</div>
+<div class="icon">
+    
+        
+        <a title="rss" href="/atom.xml" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-rss"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="github" href="https://github.com/jamesying" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="csdn" href="https://inday.cnblogs.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-csdn"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:james@taogame.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=785418&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active" data-rel="全部文章">全部文章<small>(6)</small></div></li>
+    
+        
+            
+            <li><div data-rel=".Net_Core">.Net_Core<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="微服务">微服务<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="abp">abp<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="日常生活">日常生活<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="6">
+<input type="hidden" id="yelog_site_word_count" value="7.2k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" />
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>.Net Core</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>abp</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Asp.Net Core</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Kestrel</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>SignalR</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>微信</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>生活</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="全部文章 日常生活 "
+           href="/2020/09/30/life-2020-09-30/"
+           data-tag="生活"
+           data-author="" >
+            <span class="post-title" title="记录在2020年国庆之前">记录在2020年国庆之前</span>
+            <span class="post-date" title="2020-09-30 15:14:13">2020/09/30</span>
+        </a>
+        
+        <a  class="全部文章 abp "
+           href="/2020/09/20/Use-mysql-on-abp-vnext%20copy/"
+           data-tag="Asp.Net Core,SignalR,微信,abp"
+           data-author="" >
+            <span class="post-title" title="Abp vNext 切换MySql数据库">Abp vNext 切换MySql数据库</span>
+            <span class="post-date" title="2020-09-20 00:00:00">2020/09/20</span>
+        </a>
+        
+        <a  class="全部文章 .Net_Core "
+           href="/2020/09/02/signalr-wechat-miniapp/"
+           data-tag=".Net Core,SignalR"
+           data-author="" >
+            <span class="post-title" title="Asp.Net Core SignalR 与微信小程序交互笔记">Asp.Net Core SignalR 与微信小程序交互笔记</span>
+            <span class="post-date" title="2020-09-02 15:09:05">2020/09/02</span>
+        </a>
+        
+        <a  class="全部文章 .Net_Core "
+           href="/2020/09/01/signalR-core-grace-call-client-methods/"
+           data-tag=".Net Core,SignalR"
+           data-author="" >
+            <span class="post-title" title="Asp.Net Core SignalR 用泛型Hub优雅的调用前端方法及传参">Asp.Net Core SignalR 用泛型Hub优雅的调用前端方法及传参</span>
+            <span class="post-date" title="2020-09-01 15:07:23">2020/09/01</span>
+        </a>
+        
+        <a  class="全部文章 .Net_Core "
+           href="/2020/08/30/Make-a-docker-image-for-ocelot/"
+           data-tag="Asp.Net Core,Kestrel,.Net Core"
+           data-author="" >
+            <span class="post-title" title="给Ocelot打造一个Docker镜像">给Ocelot打造一个Docker镜像</span>
+            <span class="post-date" title="2020-08-30 11:28:10">2020/08/30</span>
+        </a>
+        
+        <a  class="全部文章 微服务 "
+           href="/2020/04/30/Single-Service-Architecture-Intro/"
+           data-tag="Asp.Net Core,Kestrel,.Net Core"
+           data-author="" >
+            <span class="post-title" title="单体服务架构-一种新型的适合中小型企业的服务架构">单体服务架构-一种新型的适合中小型企业的服务架构</span>
+            <span class="post-date" title="2020-04-30 00:00:00">2020/04/30</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-Make-a-docker-image-for-ocelot" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">给Ocelot打造一个Docker镜像</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel=".Net_Core">.Net_Core</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color3">Asp.Net Core</a>
+            
+            <a class="color3">Kestrel</a>
+            
+            <a class="color5">.Net Core</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2020-09-30 20:28:35'>2020-08-30 11:28</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.5k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9B%E5%BB%BADockerfile%E4%BB%A3%E7%A0%81"><span class="toc-text">创建Dockerfile代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%9F%E6%88%90Docker%E9%95%9C%E5%83%8F"><span class="toc-text">生成Docker镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E5%AE%B9%E5%99%A8"><span class="toc-text">运行容器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-text">写在最后</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>在微服务架构中，ApiGateway起到了承前启后，不仅可以根据客户端进行分类，也可以根据功能业务进行分类，而且对于服务调用服务也起到了很好的接口作用。目前在各个云端中，基本上都提供了ApiGateway的功能（付费功能），通过SDK或者在线进行配置。<br>在Java体系中有<a target="_blank" rel="noopener" href="https://github.com/Netflix/zuul">Zuul</a>和<a target="_blank" rel="noopener" href="https://github.com/Kong/kong">Kong</a>都是比较著名的。<br>在.Net体系中，目前比较热门的（短短1年时间已经1000+stars了）<br><a target="_blank" rel="noopener" href="https://github.com/TomPallister/Ocelot">Ocelot</a>，这是一个非常优秀的基于 .Net Core的Api网关开源项目，我们的在<a target="_blank" rel="noopener" href="https://www.cnblogs.com/shanyou">队长</a>也参与了开发，过年前又被纳入了微软<a target="_blank" rel="noopener" href="https://github.com/dotnet-architecture/eShopOnContainers">eShop</a>微服务架构Demo项目中，作为其Api网关，目前正在整合中，有兴趣可以关注项目中新的的<a target="_blank" rel="noopener" href="https://github.com/dotnet-architecture/eShopOnContainers/tree/ocelot">Ocelot Branch</a>。</p>
+<p>基本的使用方式在园中已有<a target="_blank" rel="noopener" href="http://www.cnblogs.com/ibeisha/p/ocelot.html">博主</a>写过了，不过内容是之前版本的，新版本稍微有点不同，还是建议大家看<a target="_blank" rel="noopener" href="http://ocelot.readthedocs.io/en/latest/">文档</a>。通过文档我们了解，Ocelot是通过一个json文件进行配置的，所以在使用的时候我们只需要修改这个json文件就可以了，每次为不同的ApiGateway创建不同的项目比较麻烦，So，今天来讲下如何把Ocelot做成一个Docker镜像，这样使用的时候只需要输入一条docker指令即可。</p>
+<blockquote>
+<p>今天的Dockerfile我是Fork了Ocelot项目后在自己的<a target="_blank" rel="noopener" href="https://github.com/JamesYing/Ocelot/tree/latest-old/">Branch</a>中弄的，直接是项目引用，这只是范例而已，你可以重新创建一个专门的项目，通过Nuget管理添加对Ocelot的引用。</p>
+</blockquote>
+<h1 id="创建Dockerfile代码"><a href="#创建Dockerfile代码" class="headerlink" title="创建Dockerfile代码"></a>创建Dockerfile代码</h1><p>Dockerfile只是一个文本文件，它每一行代表Docker镜像的一个layer，每一行由命令加参数组成，我们通过编写简单的命令，就能使用docker工具生成docker镜像。<br>首先你要在项目中创建Dockerfile，请记住，把你的Dockerfile放在sln目录下，因为Dockerfile文件的build环境是按照你这个文件的目录来的，切记，博主之前花了N天才发现这个弱智的问题。docker command对文件名对大小写敏感。</p>
+<p>直接上代码：</p>
+<pre><code>FROM microsoft/aspnetcore:2.0 AS base #基于asp.net core 2.0镜像
+WORKDIR /app
+EXPOSE 80
+
+# 先使用asp.net core build镜像，然后复制项目到/src目录
+FROM microsoft/aspnetcore-build:2.0 AS build
+WORKDIR /src
+COPY *.sln ./
+COPY demos/ApiGateway.Web/ApiGateway.Web.csproj demos/ApiGateway.Web/
+COPY src/Ocelot/Ocelot.csproj src/Ocelot/
+
+RUN dotnet restore
+
+COPY . .
+WORKDIR /src/demos/ApiGateway.Web
+RUN dotnet add package BuildBundlerMinifier
+#这里添加了对bundle的支持，你可以不使用，因为我更改了样式，所以这里加上了这个。
+RUN dotnet restore
+RUN dotnet build -c Release -o /app
+
+# 编译以后，我们进行发布，并直接复制到app目录
+FROM build AS publish
+RUN dotnet publish -c Release -o /app
+
+# 设定app目录为工作目录
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app .
+# 挂载/app/configurations目录
+VOLUME /app/Configurations
+
+ENTRYPOINT [&quot;dotnet&quot;, &quot;ApiGateway.Web.dll&quot;]</code></pre>
+<p>上面就是我的Dockerfile文件了，我在项目中并没有把configuration.json文件放到项目根目录，而是另外创建了一个Configurations目录，这样我挂载目录，可以在多个容器中共享数据。</p>
+<h1 id="生成Docker镜像"><a href="#生成Docker镜像" class="headerlink" title="生成Docker镜像"></a>生成Docker镜像</h1><p>如果你的机器上装了Docker，那可以通过命令工具，在项目的根目录运行：</p>
+<pre><code>docker build -t myocelot:v1 .</code></pre>
+<p>注意这个命令后的.一定不要忘记哦</p>
+<p>如果你机器上没有安装Docker，也没有关系，可以通过Docker仓库或者阿里云的容器管理进行生成，他们都是免费的，博主使用的是阿里云容器管理创建的，这样每次代码改动，它会自动生成新的镜像。</p>
+<h1 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h1><p>当我们有了镜像后，就可以运行容器了，因为博主用的是阿里云容器管理，所以我需要先把镜像pull到运行环境（我用的是阿里云ECS）</p>
+<pre><code>docker pull registry.cn-hangzhou.aliyuncs.com/jamesying/ocelot-demo
+docker tag registry.cn-hangzhou.aliyuncs.com/jamesying/ocelot-demo myocelot:v1</code></pre>
+<p>博主通过pull命令拉了镜像后又通过tag命令重新命名了tagname。</p>
+<p>随后我们创建一个ocelot的配置文件目录,并创建configurations.json文件：</p>
+<pre><code>mkdir /home/ocelot
+touch /home/ocelot/configurations.json</code></pre>
+<p>下面通过vi工具配置你自己的config，下面是博主的：</p>
+<pre><code>&#123;
+  &quot;ReRoutes&quot;: [
+    &#123;
+      &quot;DownstreamPathTemplate&quot;: &quot;/api/values/&#123;id&#125;&quot;,
+      &quot;DownstreamScheme&quot;: &quot;http&quot;,
+      &quot;DownstreamHostAndPorts&quot;: [
+
+        &#123;
+          &quot;Host&quot;: &quot;localhost&quot;,
+          &quot;Port&quot;: 6002
+        &#125;,
+        &#123;
+          &quot;Host&quot;: &quot;localhost&quot;,
+          &quot;Port&quot;: 6001
+        &#125;
+      ],
+      &quot;LoadBalancer&quot;: &quot;RoundRobin&quot;,
+      &quot;UpstreamPathTemplate&quot;: &quot;/api/v1/values/&#123;id&#125;&quot;,
+      &quot;DownstreamHealthcheckPath&quot;: &quot;/hc?apikey=testapi&quot;,
+      &quot;UpstreamHttpMethod&quot;: [ &quot;GET&quot;, &quot;Put&quot;, &quot;Delete&quot; ]
+    &#125;
+  ],
+  &quot;GlobalConfiguration&quot;: &#123;&#125;
+&#125;</code></pre>
+<p>后面我们来运行容器：</p>
+<pre><code>docker run --name myocelot -p 6008:80 -v /home/ocelot:/app/configurations -d ocelot:v1</code></pre>
+<p>成功运行以后，我们就可以通过6008端口访问了，你可以通过 <a target="_blank" rel="noopener" href="http://ocelot.jcsoft.xyz:6008/">http://ocelot.jcsoft.xyz:6008</a> 看下Demo。下图为演示截图：<br><img src="http://images.cnblogs.com/cnblogs_com/inday/14896/o_TIM%e6%88%aa%e5%9b%be20180224162737.png" alt="image"></p>
+<h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>为什么会有这个镜像呢，因为通过镜像生成很简单，而且配置文件更改后，只需要docker restart myocelot就能重新加载，非常简便。今天的内容很简单，但很实用，当然这个镜像还是有点欠缺的，因为Ocelot有很多功能，还需要在Startup.cs中注册一些service才可以使用，博主有个想法，弄个专门的Ocelot Demo，只需要通过config文件就能自动注册相应服务。</p>
+<p>或许你从Demo中看到了楼主对Ocelot的改动，楼主增加了 <code>DownstreamHealthcheckPath</code>属性，这个是为了对下游服务器进行Healthcheck的，而且楼主也PR给了Ocelot的项目负责人，不过Tom不太清楚这个属性有何用，所以我准备做个Demo给他看下，这个属性很有用，除了可以通过试图查看下游服务器状态，同时也可以在LoadBalance的时候把无效的服务器给忽略掉。</p>
+<p>大家觉得Healthcheck是否有必要呢？</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 james@taogame.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>给Ocelot打造一个Docker镜像</p>
+    <p><span class="copy-title">字数:</span><span class="post-count">1.5k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="脑洞的蜂蜜">脑洞的蜂蜜</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-08-30, 11:28:10</p>
+    <p><span class="copy-title">最后更新:</span>2020-09-30, 20:28:35</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/08/30/Make-a-docker-image-for-ocelot/" title="给Ocelot打造一个Docker镜像">http://www.jamesying.com/2020/08/30/Make-a-docker-image-for-ocelot/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#34;署名-非商用-相同方式共享 4.0&#34;</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+    <div id="comments">
+    <script src="https://utteranc.es/client.js"
+            repo="JamesYing/BlogsRelatedCodes"
+            issue-term="pathname"
+            theme="github-light"
+            label="jamesblog"
+            crossorigin="anonymous"
+            async>
+    </script>
+</div>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2016-2020 JamesBlog
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.png" class="alipay" title="扫码支持">
+            <img src="/img/weixin.png" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?544cb2dafda458d911911b76a3b1d65d";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 722px;
+    }
+    .nav.fullscreen {
+        margin-left: -722px;
+    }
+    .nav-left {
+        width: 300px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 632px;
+        }
+        .nav.fullscreen {
+            margin-left: -632px;
+        }
+        .nav-left {
+            width: 240px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 632px;
+            margin-left: -632px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    #post .pjax article .article-entry>ol, #post .pjax article .article-entry>ul, #post .pjax article>ol, #post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    #post .pjax article .article-entry li>ol, #post .pjax article .article-entry li>ul,#post .pjax article li>ol, #post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    #post .pjax article .article-entry>ol>li, #post .pjax article .article-entry>ul>li,#post .pjax article>ol>li, #post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    #post .pjax article .article-entry li>ol>li, #post .pjax article .article-entry li>ul>li,#post .pjax article li>ol>li, #post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    #post {
+        background: url(https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260);
+    }
+    
+    
+    #post .index {
+        background: url(https://images.pexels.com/photos/963486/pexels-photo-963486.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260);
+    }
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

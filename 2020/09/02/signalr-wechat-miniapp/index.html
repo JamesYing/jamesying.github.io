@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Asp.Net Core SignalR 与微信小程序交互笔记 | James&#39;s Blog -- 脑洞的蜂蜜</title>
+  <meta name="keywords" content=" .Net Core , SignalR ">
+  <meta name="description" content="Asp.Net Core SignalR 与微信小程序交互笔记 | James&#39;s Blog -- 脑洞的蜂蜜">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="自我介绍  十年的开发经验和项目管理经验，具有较强的编程能力和逻辑分析能力，对.Net， .Net Core, Java有一定的了解和接触。多年的经验，接触过各类的项目架构，单体架构、分布式架构、SOA、微服务架构等等。能够按照项目需求，能够及时对产品进行分析，并分配研发工作。在团队中能做一定的技术指导，对于一些线上问题，都能及时找到解决方案并解决。 先后曾任职于5173、盛大文学、IPS、百强旅">
+<meta property="og:type" content="website">
+<meta property="og:title" content="关于我-脑洞的蜂蜜">
+<meta property="og:url" content="http://www.jamesying.com/about/index.html">
+<meta property="og:site_name" content="James&#39;s Blog -- 脑洞的蜂蜜">
+<meta property="og:description" content="自我介绍  十年的开发经验和项目管理经验，具有较强的编程能力和逻辑分析能力，对.Net， .Net Core, Java有一定的了解和接触。多年的经验，接触过各类的项目架构，单体架构、分布式架构、SOA、微服务架构等等。能够按照项目需求，能够及时对产品进行分析，并分配研发工作。在团队中能做一定的技术指导，对于一些线上问题，都能及时找到解决方案并解决。 先后曾任职于5173、盛大文学、IPS、百强旅">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-09-30T05:35:41.000Z">
+<meta property="article:modified_time" content="2020-09-30T12:28:35.633Z">
+<meta property="article:author" content="脑洞的蜂蜜">
+<meta property="article:tag" content="架构师 重构师 面对未知勇于挑战">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/fav.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-dark.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/header.jpg" />
+</a>
+<div class="author">
+    <span>脑洞的蜂蜜</span>
+</div>
+<div class="desc">
+    <span>
+        胜寒会员，从事Asp.Net开发13年，先后曾任职于5173、盛大文学、IPS、百强旅游公司，Softtek担任技术开发工作，目前就职于【华住集团】，担任架构师，为易系列.Net 产品负责研发工作。开源项目“微信快速开发框架”负责人，目前正在研究.Net Core与微服务架构。
+    </span>
+</div>
+<div class="icon">
+    
+        
+        <a title="rss" href="/atom.xml" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-rss"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="github" href="https://github.com/jamesying" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="csdn" href="https://inday.cnblogs.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-csdn"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:james@taogame.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=785418&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active" data-rel="全部文章">全部文章<small>(6)</small></div></li>
+    
+        
+            
+            <li><div data-rel=".Net_Core">.Net_Core<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="微服务">微服务<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="abp">abp<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="日常生活">日常生活<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="6">
+<input type="hidden" id="yelog_site_word_count" value="7.2k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" />
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>.Net Core</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>abp</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Asp.Net Core</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Kestrel</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>SignalR</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>微信</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>生活</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="全部文章 日常生活 "
+           href="/2020/09/30/life-2020-09-30/"
+           data-tag="生活"
+           data-author="" >
+            <span class="post-title" title="记录在2020年国庆之前">记录在2020年国庆之前</span>
+            <span class="post-date" title="2020-09-30 15:14:13">2020/09/30</span>
+        </a>
+        
+        <a  class="全部文章 abp "
+           href="/2020/09/20/Use-mysql-on-abp-vnext%20copy/"
+           data-tag="Asp.Net Core,SignalR,微信,abp"
+           data-author="" >
+            <span class="post-title" title="Abp vNext 切换MySql数据库">Abp vNext 切换MySql数据库</span>
+            <span class="post-date" title="2020-09-20 00:00:00">2020/09/20</span>
+        </a>
+        
+        <a  class="全部文章 .Net_Core "
+           href="/2020/09/02/signalr-wechat-miniapp/"
+           data-tag=".Net Core,SignalR"
+           data-author="" >
+            <span class="post-title" title="Asp.Net Core SignalR 与微信小程序交互笔记">Asp.Net Core SignalR 与微信小程序交互笔记</span>
+            <span class="post-date" title="2020-09-02 15:09:05">2020/09/02</span>
+        </a>
+        
+        <a  class="全部文章 .Net_Core "
+           href="/2020/09/01/signalR-core-grace-call-client-methods/"
+           data-tag=".Net Core,SignalR"
+           data-author="" >
+            <span class="post-title" title="Asp.Net Core SignalR 用泛型Hub优雅的调用前端方法及传参">Asp.Net Core SignalR 用泛型Hub优雅的调用前端方法及传参</span>
+            <span class="post-date" title="2020-09-01 15:07:23">2020/09/01</span>
+        </a>
+        
+        <a  class="全部文章 .Net_Core "
+           href="/2020/08/30/Make-a-docker-image-for-ocelot/"
+           data-tag="Asp.Net Core,Kestrel,.Net Core"
+           data-author="" >
+            <span class="post-title" title="给Ocelot打造一个Docker镜像">给Ocelot打造一个Docker镜像</span>
+            <span class="post-date" title="2020-08-30 11:28:10">2020/08/30</span>
+        </a>
+        
+        <a  class="全部文章 微服务 "
+           href="/2020/04/30/Single-Service-Architecture-Intro/"
+           data-tag="Asp.Net Core,Kestrel,.Net Core"
+           data-author="" >
+            <span class="post-title" title="单体服务架构-一种新型的适合中小型企业的服务架构">单体服务架构-一种新型的适合中小型企业的服务架构</span>
+            <span class="post-date" title="2020-04-30 00:00:00">2020/04/30</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-signalr-wechat-miniapp" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">Asp.Net Core SignalR 与微信小程序交互笔记</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel=".Net_Core">.Net_Core</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">.Net Core</a>
+            
+            <a class="color3">SignalR</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2020-09-30 20:28:35'>2020-09-02 15:09</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.3k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFAsp-Net-Core-SignalR"><span class="toc-text">什么是Asp.Net Core SignalR</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD"><span class="toc-text">功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E5%BF%83-Hubs"><span class="toc-text">中心 Hubs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hubs-Clients"><span class="toc-text">Hubs.Clients</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HubContext"><span class="toc-text">HubContext</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%A4%E7%A7%8D%E5%8D%8F%E8%AE%AE"><span class="toc-text">两种协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BA%8B%E9%A1%B9"><span class="toc-text">服务器事项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90"><span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E6%A0%87%E8%AF%86"><span class="toc-text">用户标识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Group-%E5%88%86%E7%BB%84"><span class="toc-text">Group 分组</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%B8%8ESignalR%E4%BA%A4%E4%BA%92"><span class="toc-text">微信小程序与SignalR交互</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8"><span class="toc-text">如何使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E7%94%A8%E7%B1%BB%E5%BA%93"><span class="toc-text">调用类库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA-%E4%B8%80%E4%B8%AA%E6%98%A0%E5%B0%84%E6%96%B9%E6%B3%95"><span class="toc-text">创建 一个映射方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E8%A1%8C%E8%BF%9E%E6%8E%A5"><span class="toc-text">进行连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E7%94%A8SignalR%E6%96%B9%E6%B3%95"><span class="toc-text">调用SignalR方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-text">写在最后</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="什么是Asp-Net-Core-SignalR"><a href="#什么是Asp-Net-Core-SignalR" class="headerlink" title="什么是Asp.Net Core SignalR"></a>什么是Asp.Net Core SignalR</h1><p>Asp.Net Core SignalR 是微软开发的一套基于Asp.Net Core的与Web进行实时交互的类库，它使我们的应用能够实时的把数据推送给Web客户端。</p>
+<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><ul>
+<li>自动管理连接</li>
+<li>允许同时广播到所有客户端</li>
+<li>也可以广播到指定的组或者特定的客户端</li>
+<li>在Github上开源，<a target="_blank" rel="noopener" href="https://github.com/aspnet/signalr">传送门</a></li>
+</ul>
+<p>SignalR 提供了多种连接方式，在现代化应用中，WebSocket是最佳的传输协议，在客户端无法实现WebSocket协议的时候，SignalR就会采取其他方式，比如Server-Sent或者长轮询（在ws未出现之前，我们讨论的推拉模式）</p>
+<h2 id="中心-Hubs"><a href="#中心-Hubs" class="headerlink" title="中心 Hubs"></a>中心 Hubs</h2><p>SignalR是采用中心客户端和服务器进行通讯。</p>
+<p>中心是一种高级的管道，允许客户端和服务器之间相互调用方法。</p>
+<p>中心通过强类型参数传递给方法，进行模型绑定</p>
+<h3 id="Hubs-Clients"><a href="#Hubs-Clients" class="headerlink" title="Hubs.Clients"></a>Hubs.Clients</h3><p>Clients属性包含了所有的客户端连接信息，它包含了3个属性：</p>
+<ul>
+<li><code>All</code> 所有客户端</li>
+<li><code>Caller</code> 进行此次请求的客户端</li>
+<li><code>Others</code> 排除此次请求客户端的其他客户端<br>包含了多个方法：<br>= <code>AllExcept</code>    在指定的连接除外的所有连接的客户端上调用方法</li>
+<li><code>Client</code>    在特定连接的客户端上调用方法</li>
+<li><code>Clients</code>    在特定连接的客户端上调用方法</li>
+<li><code>Group</code>    调用指定的组中的一种对所有连接方法</li>
+<li><code>GroupExcept</code>    调用中指定的组，除非指定连接到的所有连接的方法</li>
+<li><code>Groups</code>    调用一种对多个组的连接方法</li>
+<li><code>OthersInGroup</code>    调用一种对一组的连接，不包括客户端调用 hub 方法方法</li>
+<li><code>User</code>    调用一种对与特定用户关联的所有连接方法</li>
+<li><code>Users</code>    调用一种对与指定的用户相关联的所有连接方法</li>
+</ul>
+<p>每个属性和方法返回的对象都包含一个<code>SendAsync</code>方法，可以对客户端进行调用。</p>
+<h2 id="HubContext"><a href="#HubContext" class="headerlink" title="HubContext"></a>HubContext</h2><p>可以在应用其他地方通过使用IHubContext，达到调用Hub的目的。</p>
+<h2 id="两种协议"><a href="#两种协议" class="headerlink" title="两种协议"></a>两种协议</h2><ul>
+<li>文本协议：JSON</li>
+<li>二进制协议：<a target="_blank" rel="noopener" href="https://msgpack.org/">MessagePack</a></li>
+</ul>
+<p>MessagePack类似于JSON，但传输比JSON更快，数据大小比JSON更小</p>
+<h2 id="服务器事项"><a href="#服务器事项" class="headerlink" title="服务器事项"></a>服务器事项</h2><ul>
+<li>创建的Hub必须继承<code>Microsoft.AspNetCore.SignalR.Hub</code>,Hub类已经包含了管理连接、组和发送接收消息的属性及事件</li>
+<li>在Hub中使用的方法应该尽量使用异步的方式，因为SignalR在发送和接收消息的时候使用的是异步方法。</li>
+<li>在<code>Startup.ConfigureServices</code>中通过<code>services.AddSignalR</code>对SignalR进行注册</li>
+<li>在<code>Startup.Configure</code>中通过<code>app.UseSignalR</code>方法对Hub路由进行配置</li>
+</ul>
+<h2 id="代码解析"><a href="#代码解析" class="headerlink" title="代码解析"></a>代码解析</h2><p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/aspnet/core/tutorials/signalr?view=aspnetcore-2.1&tabs=visual-studio">微软官方示范</a>中的ChatHub：</p>
+<pre><code>using Microsoft.AspNetCore.SignalR;
+using System.Threading.Tasks;
+
+namespace SignalRChat.Hubs
+&#123;
+    public class ChatHub : Hub
+    &#123;
+        //服务端方法
+        public async Task SendMessage(string user, string message)
+        &#123;
+            //ReceiveMessage 为客户端方法，让所有客户端调用这个方法
+            await Clients.All.SendAsync(&quot;ReceiveMessage&quot;, user, message);
+        &#125;
+    &#125;
+&#125;</code></pre>
+<p>上述代码为当收到客户端发来的<code>SendMessage</code>请求后（发送聊天信息），我们把消息发送到所有客户端，让他们调用自身的<code>ReceiveMessage</code>方法。</p>
+<h2 id="用户标识"><a href="#用户标识" class="headerlink" title="用户标识"></a>用户标识</h2><p>通常情况下，在用户进行连接后，Connection会保存用户的用户标识，以便对特定用户进行发送消息。</p>
+<p>可以实现<code>IUserIdProvider</code>来自定义获取用户的方法，例如：</p>
+<pre><code>public class CustomUserIdProvider : IUserIdProvider
+&#123;
+    public virtual string GetUserId(HubConnectionContext connection)
+    &#123;
+        return connection.User?.FindFirst(ClaimTypes.Email)?.Value;
+    &#125;
+&#125;</code></pre>
+<p>在<code>Startup.ConfigureServices</code>中注册：</p>
+<pre><code>    services.AddSingleton&lt;IUserIdProvider, CustomUserIdProvider&gt;();</code></pre>
+<h2 id="Group-分组"><a href="#Group-分组" class="headerlink" title="Group 分组"></a>Group 分组</h2><p>分组类似于聊天室中的每个房间，通过分组，我们可以给特定小组发送消息。</p>
+<blockquote>
+<p>用户标识和组名称都是区分大小写的。</p>
+</blockquote>
+<h1 id="微信小程序与SignalR交互"><a href="#微信小程序与SignalR交互" class="headerlink" title="微信小程序与SignalR交互"></a>微信小程序与SignalR交互</h1><p>小程序因为无法直接使用websocket，所以无法使用signalR.js，你可以试着把signalR.js中的webcosket使用部分换成wx.xxSocketxxx。</p>
+<p>在参考了<a target="_blank" rel="noopener" href="http://blog.lishewen.com/">算神</a>的<a target="_blank" rel="noopener" href="https://github.com/lishewen/WeChatMiniAppSignalRClient">代码</a>后，归了一个小类库，方便大家使用，源码较长，我放到了github上，点击【<a target="_blank" rel="noopener" href="https://github.com/JamesYing/signalR4Miniapp">传送门</a>】进入。</p>
+<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><h3 id="调用类库"><a href="#调用类库" class="headerlink" title="调用类库"></a>调用类库</h3><p>在要使用的页面上：</p>
+<pre><code>///引入这个类库
+var signalR = require(&#39;../../lib/signalr/signalr.js&#39;)
+///实例化一个对象
+let _client = new signalR.signalR();</code></pre>
+<h3 id="创建-一个映射方法"><a href="#创建-一个映射方法" class="headerlink" title="创建 一个映射方法"></a>创建 一个映射方法</h3><p>这是为了让小程序收到SignalR的消息之后进行回调</p>
+<pre><code>callMethods(methods, args) &#123;
+        console.log(methods, args);
+        let self = this;
+        switch (methods) &#123;
+            case &#39;sayHello&#39;:
+                self.sayHello(args[0]);
+                break;
+        &#125;
+    &#125;,</code></pre>
+<p>例子里有一个sayHello方法，我们用字符串作为key。</p>
+<h3 id="进行连接"><a href="#进行连接" class="headerlink" title="进行连接"></a>进行连接</h3><pre><code>_client.connection(url, methodMapping);</code></pre>
+<ul>
+<li>url : signalR服务器</li>
+<li>methodMapping : 方法和字符串之间的Mapping</li>
+</ul>
+<h3 id="调用SignalR方法"><a href="#调用SignalR方法" class="headerlink" title="调用SignalR方法"></a>调用SignalR方法</h3><pre><code> _client.call(methodName, args, success, fail)</code></pre>
+<ul>
+<li>methodName:远程方法名</li>
+<li>args：参数，<strong>这里注意一定要数组格式</strong></li>
+<li>success：调用成功后的回调</li>
+<li>fail：失败后的回调</li>
+</ul>
+<h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>最近真的忙，忙成一道闪电，正好遇到这个问题随之记录下。类库可能并不完善，你可以在github上提issue，我会跟进的，有好的修改方式，你也可以PR我。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 james@taogame.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>Asp.Net Core SignalR 与微信小程序交互笔记</p>
+    <p><span class="copy-title">字数:</span><span class="post-count">1.3k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="脑洞的蜂蜜">脑洞的蜂蜜</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-09-02, 15:09:05</p>
+    <p><span class="copy-title">最后更新:</span>2020-09-30, 20:28:35</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/09/02/signalr-wechat-miniapp/" title="Asp.Net Core SignalR 与微信小程序交互笔记">http://www.jamesying.com/2020/09/02/signalr-wechat-miniapp/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#34;署名-非商用-相同方式共享 4.0&#34;</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+    <div id="comments">
+    <script src="https://utteranc.es/client.js"
+            repo="JamesYing/BlogsRelatedCodes"
+            issue-term="pathname"
+            theme="github-light"
+            label="jamesblog"
+            crossorigin="anonymous"
+            async>
+    </script>
+</div>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2016-2020 JamesBlog
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.png" class="alipay" title="扫码支持">
+            <img src="/img/weixin.png" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?544cb2dafda458d911911b76a3b1d65d";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 722px;
+    }
+    .nav.fullscreen {
+        margin-left: -722px;
+    }
+    .nav-left {
+        width: 300px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 632px;
+        }
+        .nav.fullscreen {
+            margin-left: -632px;
+        }
+        .nav-left {
+            width: 240px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 632px;
+            margin-left: -632px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    #post .pjax article .article-entry>ol, #post .pjax article .article-entry>ul, #post .pjax article>ol, #post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    #post .pjax article .article-entry li>ol, #post .pjax article .article-entry li>ul,#post .pjax article li>ol, #post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    #post .pjax article .article-entry>ol>li, #post .pjax article .article-entry>ul>li,#post .pjax article>ol>li, #post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    #post .pjax article .article-entry li>ol>li, #post .pjax article .article-entry li>ul>li,#post .pjax article li>ol>li, #post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    #post {
+        background: url(https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260);
+    }
+    
+    
+    #post .index {
+        background: url(https://images.pexels.com/photos/963486/pexels-photo-963486.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260);
+    }
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
