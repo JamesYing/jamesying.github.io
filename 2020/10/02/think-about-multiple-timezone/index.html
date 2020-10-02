@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>记录在2020年国庆之前 | James&#39;s Blog -- 脑洞的蜂蜜</title>
-  <meta name="keywords" content=" 生活 ">
-  <meta name="description" content="记录在2020年国庆之前 | James&#39;s Blog -- 脑洞的蜂蜜">
+  <title>关于多时区引发一系列的问题 | James&#39;s Blog -- 脑洞的蜂蜜</title>
+  <meta name="keywords" content=" 生活 , 多时区 ">
+  <meta name="description" content="关于多时区引发一系列的问题 | James&#39;s Blog -- 脑洞的蜂蜜">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="自我介绍  十年的开发经验和项目管理经验，具有较强的编程能力和逻辑分析能力，对.Net， .Net Core, Java有一定的了解和接触。多年的经验，接触过各类的项目架构，单体架构、分布式架构、SOA、微服务架构等等。能够按照项目需求，能够及时对产品进行分析，并分配研发工作。在团队中能做一定的技术指导，对于一些线上问题，都能及时找到解决方案并解决。 先后曾任职于5173、盛大文学、IPS、百强旅">
 <meta property="og:type" content="website">
@@ -359,9 +359,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-life-2020-09-30" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-think-about-multiple-timezone" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">记录在2020年国庆之前</h1>
+        <h1 class="article-title">关于多时区引发一系列的问题</h1>
     
     <div class="article-meta">
         
@@ -371,7 +371,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="日常生活">日常生活</a>
+            <a  data-rel="架构">架构</a>
             
         </span>
         
@@ -381,17 +381,19 @@
             
             <a class="color3">生活</a>
             
+            <a class="color4">多时区</a>
+            
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2020-09-30 20:28:35'>2020-09-30 15:14</time>
+            发布时间 : <time class="date" title='最后更新: 2020-10-02 18:13:47'>2020-10-02 17:13</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:359</span>
+        <span>字数:1.1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -421,7 +423,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%B4%E8%84%91%E9%A3%8E%E6%9A%B4"><span class="toc-text">头脑风暴</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B2%89%E6%80%9D"><span class="toc-text">沉思</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -438,10 +440,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>已经很少写博客了，有时候并不是因为工作太忙，而是儿子上了小学后，每天都得陪他写作业。<br>上学没多久老师反馈注意力非常差，在开学一个月后去医院检查，严重注意力不集中，老婆又怕治疗吃药会有影响，想自己教，接下来你懂的！<br>这一年下来，效果其实并不好，他在我们面前还可以，但到了学校还是一样，我也不知道如何教他了，还是说把他交给专业的人士。<br>工作上又很多烦心事，三年来反复做着一个项目，项目不大，却很杂，分不开身做其他项目，导致大领导只知道我做一个东西！关键还克扣工资和加班，真的气人！但没办法，现在这个年纪，毕竟不是985，211很难找到好的工作，所以最近在做高软和pmp的考试，希望对以后有帮助，毕竟已经40了！</p>
-<p>鼠年对于属狗的来说真的很背，这一年发生了太多太多，我爷爷也属狗，但我知道他很快就要离开我了，我今天一定要去看看他！</p>
-<p>人到中年真的心酸，现在后悔以前已经无济于事，希望儿子能明白爸爸的苦心，为了儿子我也会继续坚持下去!</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/d6Xo3NKlZMGicuGrE0qLMfCYDBgsQu0vKKJia5gXEXR9n83bicXvP28ib0Yrx7CZpwWiaXOXjzP37ibtcDLIo3bMDqXQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>最近公司走国际化路线，所有相关产品都要牵涉到时区问题，包括我现在负责的酒店客房系统。</p>
+<p>很多会说，多时区的话只要使用UTC的话就能解决，数据库保存UTC，显示的时候根据不同时区显示就好了。<br>话是没错，但如果是新系统新应用的话确实可以这样做。但如果像一些运行了多年的系统，并且这个系统还会运行在多个时区的话，那这个方案可能不行了，因为开发周期太长了。</p>
+<h3 id="头脑风暴"><a href="#头脑风暴" class="headerlink" title="头脑风暴"></a>头脑风暴</h3><p>为了上述问题，各个技术主干头脑风暴，共同商讨对策，目的用最短的时候能够使应用国际化。<br>最终我们确定了一个方案（因保密原因，暂不能公布），虽然方案大家都觉得不错，但我却陷入了沉思。</p>
+<p>我目前负责的项目是从.Net转成Java的，但在转之前，我经历了很长的一段时间把他改成了面向对象的设计，包括清除了所有的存储过程采用ORM的方式。<br>但我知道，还有很多项目并非采用面向对象的方式设计，还有众多的存储过程，所以我明白在后续的改造中，将会是一场恶战。<br>那造成这种局面的原因是什么呢？</p>
+<h3 id="沉思"><a href="#沉思" class="headerlink" title="沉思"></a>沉思</h3><p>相信大家面试的时候，经常会被问的，面向对象是什么，有几种特性，最简单的问题却在使用中我们却不常见。<br>为了赶进度，赶目标，我们把最好的设计都统统抛开，只为凑活的完成功能。在完成的时候我们想着以后要重构，但真的会吗？</p>
+<p>其实我经历过，我的领导是一个合格的管理者，但并非领导者和技术者，他对项目的理解只是完成。<br>但对于我这种完美主义者，我想的更多的是扩展、维护、高可用性，为此我们也爆发了多次的冲突，结果可想而知。</p>
+<p>而我负责的项目，只是公司众多项目中的一个，我知道如果我的项目去改造，可能一周时间就可以搞定，但其他项目呢？我预计在1-2个月，而且不算测试时间。</p>
+<blockquote>
+<p>是何种原因造成如此大的差距呢？</p>
+</blockquote>
+<p>首先是技术能力。每个人的技术能力皆不同，所以每个项目完成的情况也都不一样，但我知道一些加班加点的项目，基本上都是为了凑活而完成的，所有的思想都是面向解决问题而非技术架构。<br>这类应用在这次的改造中，会遇到巨大的挑战。</p>
+<p>其次是开发标准。因为在工作经验上的优势，我曾提出过一些改进方案，最终都没有得到任何反馈，所以现在我也明白了，我的领导或许不需要建议。<br>但作为架构师来说，我明白开发标准的意义，他带来的不是一个规范，更多的会让你的项目开发周期变短，你的维护成本缩小。<br>有时想想真的可笑，一个以技术著称的企业，却没有几个技术出众之人。（关于开发标准，后续我会另开新篇把自己的想法说一说）</p>
+<p>可能疫情的关系，公司很多问题都暴露出来，大家表面心和，但各自还是在暗暗较劲，勾心斗角，我曾在入职没多久提出服务化架构及开发标准等，但这些并没有由我的领导反馈给公司。<br>大概在今年，其他小组提出了改造方案，并获得大领导赏识，我的领导却只是附和。领导善于画饼，但当你真的能力突出的时候，他却会用权利来压你，很心塞。</p>
+<p>当然我相信我们公司还是会更好的，我还是会有很多机会，相信各位也是一样，加油！</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 james@taogame.com </span>
@@ -455,12 +467,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>记录在2020年国庆之前</p>
-    <p><span class="copy-title">字数:</span><span class="post-count">359</span></p>
+    <p><span class="copy-title">文章标题:</span>关于多时区引发一系列的问题</p>
+    <p><span class="copy-title">字数:</span><span class="post-count">1.1k</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="脑洞的蜂蜜">脑洞的蜂蜜</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-09-30, 15:14:13</p>
-    <p><span class="copy-title">最后更新:</span>2020-09-30, 20:28:35</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/09/30/life-2020-09-30/" title="记录在2020年国庆之前">http://www.jamesying.com/2020/09/30/life-2020-09-30/</a>
+    <p><span class="copy-title">发布时间:</span>2020-10-02, 17:13:02</p>
+    <p><span class="copy-title">最后更新:</span>2020-10-02, 18:13:47</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/10/02/think-about-multiple-timezone/" title="关于多时区引发一系列的问题">http://www.jamesying.com/2020/10/02/think-about-multiple-timezone/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#34;署名-非商用-相同方式共享 4.0&#34;</a> 转载请保留原文链接及作者。
     </p>
