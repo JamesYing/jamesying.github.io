@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>关于我-脑洞的蜂蜜 | James&#39;s Blog -- 脑洞的蜂蜜</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="关于我-脑洞的蜂蜜 | James&#39;s Blog -- 脑洞的蜂蜜">
+  <title>.Net Core HttpClient 忽略https证书提醒 | James&#39;s Blog -- 脑洞的蜂蜜</title>
+  <meta name="keywords" content=" .Net Core ">
+  <meta name="description" content=".Net Core HttpClient 忽略https证书提醒 | James&#39;s Blog -- 脑洞的蜂蜜">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="自我介绍  十年的开发经验和项目管理经验，具有较强的编程能力和逻辑分析能力，对.Net， .Net Core, Java有一定的了解和接触。多年的经验，接触过各类的项目架构，单体架构、分布式架构、SOA、微服务架构等等。能够按照项目需求，能够及时对产品进行分析，并分配研发工作。在团队中能做一定的技术指导，对于一些线上问题，都能及时找到解决方案并解决。 先后曾任职于5173、盛大文学、IPS、百强旅">
 <meta property="og:type" content="website">
@@ -385,24 +385,39 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
+        <article id="post-ignore-https-warning" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">关于我-脑洞的蜂蜜</h1>
+        <h1 class="article-title">.Net Core HttpClient 忽略https证书提醒</h1>
     
     <div class="article-meta">
         
         
         
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel=".Net_Core">.Net_Core</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">.Net Core</a>
+            
+        </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2020-09-30 20:28:35'>2020-09-30 13:35</time>
+            发布时间 : <time class="date" title='最后更新: 2020-10-02 21:05:22'>2019-10-02 21:04</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:441</span>
+        <span>字数:55</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -432,7 +447,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D"><span class="toc-text">自我介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E7%BB%8F%E9%AA%8C"><span class="toc-text">工作经验</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%8E%E4%BD%8F%E9%9B%86%E5%9B%A2-%E6%9E%B6%E6%9E%84%E5%B8%88-%EF%BC%882018-03-%E8%87%B3%E4%BB%8A%EF%BC%89"><span class="toc-text">华住集团 架构师 （2018.03-至今）</span></a></li></ol></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -449,18 +464,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="自我介绍"><a href="#自我介绍" class="headerlink" title="自我介绍"></a>自我介绍</h3><p>  十年的开发经验和项目管理经验，具有较强的编程能力和逻辑分析能力，对.Net， .Net Core, Java有一定的了解和接触。<br>多年的经验，接触过各类的项目架构，单体架构、分布式架构、SOA、微服务架构等等。<br>能够按照项目需求，能够及时对产品进行分析，并分配研发工作。<br>在团队中能做一定的技术指导，对于一些线上问题，都能及时找到解决方案并解决。</p>
-<p>先后曾任职于5173、盛大文学、IPS、百强旅游公司，Softtek担任技术开发工作，目前就职于【华住集团】，担任架构师，为易系列.Net 产品负责研发工作。开源项目“微信快速开发框架”负责人，目前正在研究.Net Core与微服务架构。</p>
-<h3 id="工作经验"><a href="#工作经验" class="headerlink" title="工作经验"></a>工作经验</h3><h4 id="华住集团-架构师-（2018-03-至今）"><a href="#华住集团-架构师-（2018-03-至今）" class="headerlink" title="华住集团 架构师 （2018.03-至今）"></a>华住集团 架构师 （2018.03-至今）</h4><ol>
-<li>负责集团酒店客房管理系统整体规划、研发、监控及技术支持</li>
-<li>公司技术委员会成员，对其他项目技术问题进行支持</li>
-<li>制定小组开发标准，并记录各类问题到知识库</li>
-<li>对于二线、三线客服进行产品培训及问题解答</li>
-<li>对接Devops平台，解决发布、部署等问题</li>
-<li>制定年度，季度目标，并设定绩效KPI</li>
-<li>负责易工单系统的整体规划、架构及研发和技术工作，选用了.Net Core + EF Core</li>
-<li>负责酒店客房管理系统从Net转变Java的整体化工作，从需求调研、架构评审及功能分解，到工作分配，并在一个月时间内顺利完成了从调研到上线的工作。</li>
-</ol>
+        <p>在测试中经常会遇到请求一些https的url,但又没有本地证书,这时候可以用下面的方法忽略警告</p>
+<pre><code>    var httpclientHandler = new HttpClientHandler();
+    httpclientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, error) =&gt; true;
+    var httpClient = new HttpClient(httpclientHandler);</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 james@taogame.com </span>
@@ -472,6 +479,18 @@
     <a  class="dashang" onclick="dashangToggle()">赏</a>
 </p>
 
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>.Net Core HttpClient 忽略https证书提醒</p>
+    <p><span class="copy-title">字数:</span><span class="post-count">55</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="脑洞的蜂蜜">脑洞的蜂蜜</a></p>
+    <p><span class="copy-title">发布时间:</span>2019-10-02, 21:04:19</p>
+    <p><span class="copy-title">最后更新:</span>2020-10-02, 21:05:22</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/10/02/ignore-https-warning/" title=".Net Core HttpClient 忽略https证书提醒">http://www.jamesying.com/2019/10/02/ignore-https-warning/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#34;署名-非商用-相同方式共享 4.0&#34;</a> 转载请保留原文链接及作者。
+    </p>
+</div>
 
 
 

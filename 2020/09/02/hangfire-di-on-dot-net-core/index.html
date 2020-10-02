@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>关于我-脑洞的蜂蜜 | James&#39;s Blog -- 脑洞的蜂蜜</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="关于我-脑洞的蜂蜜 | James&#39;s Blog -- 脑洞的蜂蜜">
+  <title>在Asp.Net Core中使用DI的方式使用Hangfire构建后台执行脚本 | James&#39;s Blog -- 脑洞的蜂蜜</title>
+  <meta name="keywords" content=" .Net Core , DI , hangfire ">
+  <meta name="description" content="在Asp.Net Core中使用DI的方式使用Hangfire构建后台执行脚本 | James&#39;s Blog -- 脑洞的蜂蜜">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="自我介绍  十年的开发经验和项目管理经验，具有较强的编程能力和逻辑分析能力，对.Net， .Net Core, Java有一定的了解和接触。多年的经验，接触过各类的项目架构，单体架构、分布式架构、SOA、微服务架构等等。能够按照项目需求，能够及时对产品进行分析，并分配研发工作。在团队中能做一定的技术指导，对于一些线上问题，都能及时找到解决方案并解决。 先后曾任职于5173、盛大文学、IPS、百强旅">
 <meta property="og:type" content="website">
@@ -385,24 +385,43 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
+        <article id="post-hangfire-di-on-dot-net-core" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">关于我-脑洞的蜂蜜</h1>
+        <h1 class="article-title">在Asp.Net Core中使用DI的方式使用Hangfire构建后台执行脚本</h1>
     
     <div class="article-meta">
         
         
         
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel=".Net_Core">.Net_Core</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">.Net Core</a>
+            
+            <a class="color3">DI</a>
+            
+            <a class="color4">hangfire</a>
+            
+        </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2020-09-30 20:28:35'>2020-09-30 13:35</time>
+            发布时间 : <time class="date" title='最后更新: 2020-10-02 21:07:08'>2020-09-02 21:06</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:441</span>
+        <span>字数:997</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -432,7 +451,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D"><span class="toc-text">自我介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E7%BB%8F%E9%AA%8C"><span class="toc-text">工作经验</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%8E%E4%BD%8F%E9%9B%86%E5%9B%A2-%E6%9E%B6%E6%9E%84%E5%B8%88-%EF%BC%882018-03-%E8%87%B3%E4%BB%8A%EF%BC%89"><span class="toc-text">华住集团 架构师 （2018.03-至今）</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%B3%A8%E5%86%8C"><span class="toc-text">安装注册</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5"><span class="toc-text">依赖注入</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">参考资料</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -449,18 +468,133 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="自我介绍"><a href="#自我介绍" class="headerlink" title="自我介绍"></a>自我介绍</h3><p>  十年的开发经验和项目管理经验，具有较强的编程能力和逻辑分析能力，对.Net， .Net Core, Java有一定的了解和接触。<br>多年的经验，接触过各类的项目架构，单体架构、分布式架构、SOA、微服务架构等等。<br>能够按照项目需求，能够及时对产品进行分析，并分配研发工作。<br>在团队中能做一定的技术指导，对于一些线上问题，都能及时找到解决方案并解决。</p>
-<p>先后曾任职于5173、盛大文学、IPS、百强旅游公司，Softtek担任技术开发工作，目前就职于【华住集团】，担任架构师，为易系列.Net 产品负责研发工作。开源项目“微信快速开发框架”负责人，目前正在研究.Net Core与微服务架构。</p>
-<h3 id="工作经验"><a href="#工作经验" class="headerlink" title="工作经验"></a>工作经验</h3><h4 id="华住集团-架构师-（2018-03-至今）"><a href="#华住集团-架构师-（2018-03-至今）" class="headerlink" title="华住集团 架构师 （2018.03-至今）"></a>华住集团 架构师 （2018.03-至今）</h4><ol>
-<li>负责集团酒店客房管理系统整体规划、研发、监控及技术支持</li>
-<li>公司技术委员会成员，对其他项目技术问题进行支持</li>
-<li>制定小组开发标准，并记录各类问题到知识库</li>
-<li>对于二线、三线客服进行产品培训及问题解答</li>
-<li>对接Devops平台，解决发布、部署等问题</li>
-<li>制定年度，季度目标，并设定绩效KPI</li>
-<li>负责易工单系统的整体规划、架构及研发和技术工作，选用了.Net Core + EF Core</li>
-<li>负责酒店客房管理系统从Net转变Java的整体化工作，从需求调研、架构评审及功能分解，到工作分配，并在一个月时间内顺利完成了从调研到上线的工作。</li>
-</ol>
+        <p>最近项目中需要用到后台Job，原有在Windows中我们会使用命令行程序结合计划任务或者直接生成Windows Service，现在.Net Core跨平台了，虽然Linux下也有计划任务，但跟原有方式一样，没撒图形界面，执行结果之类的只能去服务器查看日志。<br>看了下Hangfire，基本满足于现有需求，有图形UI，注册后台Job也非常简便，考虑之下，就是用它了。</p>
+<h1 id="安装注册"><a href="#安装注册" class="headerlink" title="安装注册"></a>安装注册</h1><p>Hangfire的使用也非常简单，在项目中先安装Hangfire包：</p>
+<pre><code>PM&gt; Install-Package Hangfire</code></pre>
+<p>Asp.Net Core项目的话，打开Startup.cs，在<code>ConfigureServices</code>方法中添加注册：</p>
+<pre><code>services.AddHangfire(x =&gt; x.UseSqlServerStorage(&quot;connection string&quot;));</code></pre>
+<p><code>connection string</code>是数据库连接字符串，我用的时Sql Server，你也可以使用Redis，Mysql等其他数据库。</p>
+<p>注册完成后，我们在Configure方法中，添加如下代码：</p>
+<pre><code>app.UseHangfireServer();
+app.UseHangfireDashboard();</code></pre>
+<p>好了，等项目启动之后，Hangfire先Migration相关数据结构，项目启动之后，可以通过项目地址+<code>/Hangfire</code>查看是否运行成功，看到如下界面基本没有问题了。<br><img src="https://github.com/JamesYing/mpdevclass/blob/master/blogs/20180624121943.png?raw=true" alt="image"></p>
+<h1 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h1><p>Hangfire的使用非常简单，基本上使用以下几个静态方法：</p>
+<pre><code>//执行后台脚本，仅执行一次
+BackgroundJob.Enqueue(() =&gt; Console.WriteLine(&quot;Fire-and-forget!&quot;)); 
+
+//延迟执行后台脚本呢，仅执行一次
+BackgroundJob.Schedule(
+    () =&gt; Console.WriteLine(&quot;Delayed!&quot;),
+    TimeSpan.FromDays(7));
+
+//周期性任务
+RecurringJob.AddOrUpdate(
+    () =&gt; Console.WriteLine(&quot;Recurring!&quot;),
+    Cron.Daily);
+
+//等上一任务完成后执行
+BackgroundJob.ContinueWith(
+    jobId,  //上一个任务的jobid
+    () =&gt; Console.WriteLine(&quot;Continuation!&quot;));</code></pre>
+<h1 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h1><p>在.Net Core中处处是DI，一不小心，你会发现你在使用Hangfire的时候会遇到各种问题，比如下列代码：</p>
+<pre><code>public class HomeController : Controller
+&#123;
+    private ILogger&lt;HomeController&gt; _logger;
+    public HomeController(ILoggerFactory loggerFactory)
+    &#123;
+        _logger = loggerFactory.CreateLogger&lt;HomeController&gt;();
+    &#125;
+    public IActionResult Index()
+    &#123;
+        _logger.LogInformation(&quot;start index&quot;);
+        BackgroundJob.Enqueue(() =&gt; _logger.LogInformation(&quot;this a job!&quot;));
+        return View();
+    &#125;
+
+&#125;</code></pre>
+<p>项目启动后，你能正常访问，但在Hangfire后台你会看到如下错误：</p>
+<p><img src="https://github.com/JamesYing/mpdevclass/blob/master/blogs/20180624123053.png?raw=true" alt="image"><br>错误信息呢大概意思是不能使用接口或者抽象方法类，其实就是因为Hangfire没有找到实例，那如何让Hangfire支持DI呢？</p>
+<p>我们先创建一个<code>MyActivator</code>类，使其继承<code>Hangfire.JobActivator</code>类，代码如下：</p>
+<pre><code>public class MyActivator : Hangfire.JobActivator
+&#123;
+    private readonly IServiceProvider _serviceProvider;
+    public MyActivator(IServiceProvider serviceProvider) =&gt; _serviceProvider = serviceProvider;
+
+    public override object ActivateJob(Type jobType)
+    &#123;
+        return _serviceProvider.GetService(jobType);
+    &#125;
+&#125;</code></pre>
+<p>重写了ActivateJob方法，使其返回的类型从我们的IServiceProvider中获取。</p>
+<p>我们试着写两个后台脚本，CheckService和TimerService，CheckService的Check方法在执行计划时，会再次调用Hangfire来定时启动TimerService：    </p>
+<p>CheckService:</p>
+<pre><code>public interface ICheckService
+&#123;
+    void Check();
+&#125;
+public class CheckService : ICheckService
+&#123;
+    private readonly ILogger&lt;CheckService&gt; _logger;
+    private ITimerService _timeservice;
+    public CheckService(ILoggerFactory loggerFactory,
+        ITimerService timerService)
+    &#123;
+        _logger = loggerFactory.CreateLogger&lt;CheckService&gt;();
+        _timeservice = timerService;
+    &#125;
+
+    public void Check()
+    &#123;
+        _logger.LogInformation($&quot;check service start checking, now is &#123;DateTime.Now&#125;&quot;);
+        BackgroundJob.Schedule(() =&gt; _timeservice.Timer(), TimeSpan.FromMilliseconds(30));
+        _logger.LogInformation($&quot;check is end, now is &#123;DateTime.Now&#125;&quot;);
+    &#125;
+&#125;</code></pre>
+<p>TimerService:</p>
+<pre><code>public interface ITimerService
+&#123;
+    void Timer();
+&#125;
+public class TimerService : ITimerService
+&#123;
+    private readonly ILogger&lt;TimerService&gt; _logger;
+    public TimerService(ILoggerFactory loggerFactory)
+    &#123;
+        _logger = loggerFactory.CreateLogger&lt;TimerService&gt;();
+    &#125;
+    public void Timer()
+    &#123;
+        _logger.LogInformation($&quot;timer service is starting, now is &#123;DateTime.Now&#125;&quot;);
+        _logger.LogWarning(&quot;timering&quot;);
+        _logger.LogInformation($&quot;timer is end, now is &#123;DateTime.Now&#125;&quot;);
+    &#125;
+&#125;</code></pre>
+<p>目前还无法使用，我们必须在<code>Startup</code>中注册这2个service：</p>
+<pre><code>services.AddScoped&lt;ITimerService, TimerService&gt;();
+services.AddScoped&lt;ICheckService, CheckService&gt;();</code></pre>
+<p>我们在<code>HomeController</code>修改以下：</p>
+<pre><code>public IActionResult Index()
+&#123;
+    _logger.LogInformation(&quot;start index&quot;);
+    BackgroundJob.Enqueue&lt;ICheckService&gt;(c =&gt; c.Check());
+    return View();
+&#125;</code></pre>
+<p>好，一切就绪，只差覆盖原始的Activator了，我们可以在<code>Startup.cs</code>中的<code>Configure</code>方法中使用如下代码：</p>
+<pre><code>public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
+&#123;
+    GlobalConfiguration.Configuration.UseActivator&lt;MyActivator&gt;(new MyActivator(serviceProvider));
+    ……
+    ……
+&#125;</code></pre>
+<blockquote>
+<p>默认情况下Configure方法时没有IServiceProvider参数的，请手动添加</p>
+</blockquote>
+<p>再次启动，我们的Job就会成功执行，截图如下：<br><img src="https://github.com/JamesYing/BlogsRelatedCodes/blob/master/images/20180624125657.png?raw=true" alt="image"></p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li>Hangfire 官网：<a target="_blank" rel="noopener" href="https://www.hangfire.io/">https://www.hangfire.io/</a></li>
+<li>Hangfire DI in .net core : <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/41829993/hangfire-dependency-injection-with-net-core">https://stackoverflow.com/questions/41829993/hangfire-dependency-injection-with-net-core</a></li>
+<li>Demo 地址：<a target="_blank" rel="noopener" href="https://github.com/JamesYing/BlogsRelatedCodes/tree/master/hangfireDemo">https://github.com/JamesYing/BlogsRelatedCodes/tree/master/hangfireDemo</a></li>
+</ul>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 james@taogame.com </span>
@@ -472,6 +606,18 @@
     <a  class="dashang" onclick="dashangToggle()">赏</a>
 </p>
 
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>在Asp.Net Core中使用DI的方式使用Hangfire构建后台执行脚本</p>
+    <p><span class="copy-title">字数:</span><span class="post-count">997</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="脑洞的蜂蜜">脑洞的蜂蜜</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-09-02, 21:06:14</p>
+    <p><span class="copy-title">最后更新:</span>2020-10-02, 21:07:08</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/09/02/hangfire-di-on-dot-net-core/" title="在Asp.Net Core中使用DI的方式使用Hangfire构建后台执行脚本">http://www.jamesying.com/2020/09/02/hangfire-di-on-dot-net-core/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#34;署名-非商用-相同方式共享 4.0&#34;</a> 转载请保留原文链接及作者。
+    </p>
+</div>
 
 
 
