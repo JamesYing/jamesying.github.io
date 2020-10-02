@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>James&#39;s Blog -- 脑洞的蜂蜜</title>
+  
+  <subtitle>在渐行渐远的路上迷路的密封</subtitle>
+  <link href="http://www.jamesying.com/atom.xml" rel="self"/>
+  
+  <link href="http://www.jamesying.com/"/>
+  <updated>2020-10-02T10:13:47.270Z</updated>
+  <id>http://www.jamesying.com/</id>
+  
+  <author>
+    <name>脑洞的蜂蜜</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>关于多时区引发一系列的问题</title>
+    <link href="http://www.jamesying.com/2020/10/02/think-about-multiple-timezone/"/>
+    <id>http://www.jamesying.com/2020/10/02/think-about-multiple-timezone/</id>
+    <published>2020-10-02T09:13:02.000Z</published>
+    <updated>2020-10-02T10:13:47.270Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>最近公司走国际化路线，所有相关产品都要牵涉到时区问题，包括我现在负责的酒店客房系统。</p><p>很多会说，多时区的话只要使用UTC的话就能解决，数据库保存UTC，显示的时候根据不同时区显示就好了。<br>话是没错，但如果是新系统新应用的话确实可以这样做。但如果像一些运行了多年的系统，并且这个系统还会运行在多个时区的话，那这个方案可能不行了，因为开发周期太长了。</p><h3 id="头脑风暴"><a href="#头脑风暴" class="headerlink" title="头脑风暴"></a>头脑风暴</h3><p>为了上述问题，各个技术主干头脑风暴，共同商讨对策，目的用最短的时候能够使应用国际化。<br>最终我们确定了一个方案（因保密原因，暂不能公布），虽然方案大家都觉得不错，但我却陷入了沉思。</p><p>我目前负责的项目是从.Net转成Java的，但在转之前，我经历了很长的一段时间把他改成了面向对象的设计，包括清除了所有的存储过程采用ORM的方式。<br>但我知道，还有很多项目并非采用面向对象的方式设计，还有众多的存储过程，所以我明白在后续的改造中，将会是一场恶战。<br>那造成这种局面的原因是什么呢？</p><h3 id="沉思"><a href="#沉思" class="headerlink" title="沉思"></a>沉思</h3><p>相信大家面试的时候，经常会被问的，面向对象是什么，有几种特性，最简单的问题却在使用中我们却不常见。<br>为了赶进度，赶目标，我们把最好的设计都统统抛开，只为凑活的完成功能。在完成的时候我们想着以后要重构，但真的会吗？</p><p>其实我经历过，我的领导是一个合格的管理者，但并非领导者和技术者，他对项目的理解只是完成。<br>但对于我这种完美主义者，我想的更多的是扩展、维护、高可用性，为此我们也爆发了多次的冲突，结果可想而知。</p><p>而我负责的项目，只是公司众多项目中的一个，我知道如果我的项目去改造，可能一周时间就可以搞定，但其他项目呢？我预计在1-2个月，而且不算测试时间。</p><blockquote><p>是何种原因造成如此大的差距呢？</p></blockquote><p>首先是技术能力。每个人的技术能力皆不同，所以每个项目完成的情况也都不一样，但我知道一些加班加点的项目，基本上都是为了凑活而完成的，所有的思想都是面向解决问题而非技术架构。<br>这类应用在这次的改造中，会遇到巨大的挑战。</p><p>其次是开发标准。因为在工作经验上的优势，我曾提出过一些改进方案，最终都没有得到任何反馈，所以现在我也明白了，我的领导或许不需要建议。<br>但作为架构师来说，我明白开发标准的意义，他带来的不是一个规范，更多的会让你的项目开发周期变短，你的维护成本缩小。<br>有时想想真的可笑，一个以技术著称的企业，却没有几个技术出众之人。（关于开发标准，后续我会另开新篇把自己的想法说一说）</p><p>可能疫情的关系，公司很多问题都暴露出来，大家表面心和，但各自还是在暗暗较劲，勾心斗角，我曾在入职没多久提出服务化架构及开发标准等，但这些并没有由我的领导反馈给公司。<br>大概在今年，其他小组提出了改造方案，并获得大领导赏识，我的领导却只是附和。领导善于画饼，但当你真的能力突出的时候，他却会用权利来压你，很心塞。</p><p>当然我相信我们公司还是会更好的，我还是会有很多机会，相信各位也是一样，加油！</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h3&gt;&lt;p&gt;最近公司走国际化路线，所有相关产品都要牵涉到时区问题，包括我现在负责的酒店客房系统。&lt;/p&gt;
+&lt;p&gt;很多会说，多时区的话只要使用UTC的话就</summary>
+      
+    
+    
+    
+    <category term="架构" scheme="http://www.jamesying.com/categories/%E6%9E%B6%E6%9E%84/"/>
+    
+    
+    <category term="生活" scheme="http://www.jamesying.com/tags/%E7%94%9F%E6%B4%BB/"/>
+    
+    <category term="多时区" scheme="http://www.jamesying.com/tags/%E5%A4%9A%E6%97%B6%E5%8C%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>记录在2020年国庆之前</title>
+    <link href="http://www.jamesying.com/2020/09/30/life-2020-09-30/"/>
+    <id>http://www.jamesying.com/2020/09/30/life-2020-09-30/</id>
+    <published>2020-09-30T07:14:13.000Z</published>
+    <updated>2020-09-30T12:28:35.631Z</updated>
+    
+    <content type="html"><![CDATA[<p>已经很少写博客了，有时候并不是因为工作太忙，而是儿子上了小学后，每天都得陪他写作业。<br>上学没多久老师反馈注意力非常差，在开学一个月后去医院检查，严重注意力不集中，老婆又怕治疗吃药会有影响，想自己教，接下来你懂的！<br>这一年下来，效果其实并不好，他在我们面前还可以，但到了学校还是一样，我也不知道如何教他了，还是说把他交给专业的人士。<br>工作上又很多烦心事，三年来反复做着一个项目，项目不大，却很杂，分不开身做其他项目，导致大领导只知道我做一个东西！关键还克扣工资和加班，真的气人！但没办法，现在这个年纪，毕竟不是985，211很难找到好的工作，所以最近在做高软和pmp的考试，希望对以后有帮助，毕竟已经40了！</p><p>鼠年对于属狗的来说真的很背，这一年发生了太多太多，我爷爷也属狗，但我知道他很快就要离开我了，我今天一定要去看看他！</p><p>人到中年真的心酸，现在后悔以前已经无济于事，希望儿子能明白爸爸的苦心，为了儿子我也会继续坚持下去!</p><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/d6Xo3NKlZMGicuGrE0qLMfCYDBgsQu0vKKJia5gXEXR9n83bicXvP28ib0Yrx7CZpwWiaXOXjzP37ibtcDLIo3bMDqXQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;已经很少写博客了，有时候并不是因为工作太忙，而是儿子上了小学后，每天都得陪他写作业。&lt;br&gt;上学没多久老师反馈注意力非常差，在开学一个月后去医院检查，严重注意力不集中，老婆又怕治疗吃药会有影响，想自己教，接下来你懂的！&lt;br&gt;这一年下来，效果其实并不好，他在我们面前还可以，</summary>
+      
+    
+    
+    
+    <category term="日常生活" scheme="http://www.jamesying.com/categories/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB/"/>
+    
+    
+    <category term="生活" scheme="http://www.jamesying.com/tags/%E7%94%9F%E6%B4%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Abp vNext 切换MySql数据库</title>
+    <link href="http://www.jamesying.com/2020/09/20/Use-mysql-on-abp-vnext%20copy/"/>
+    <id>http://www.jamesying.com/2020/09/20/Use-mysql-on-abp-vnext%20copy/</id>
+    <published>2020-09-19T16:00:00.000Z</published>
+    <updated>2020-09-30T12:45:32.830Z</updated>
+    
+    <content type="html"><![CDATA[<p>Abp vNext是Abp的下一代版本，目前还在经一步完善，代码已经全部重写了，好的东西保留了下来，去除了很多笨重的东西，从官宣来看，Abp vNext主要是为了以后微服务架构而诞生的。</p><p>从源码来看，Abp vNext已经支持了多种数据库，Sql Server，MySql，PostgreSql等。默认情况下，你创建的项目使用的是Sql Server版本，如果需要切换到MySql的话，仅需要：</p><p>第一步，在你的EntityFrameworkCore（Abp的EF框架模块，用来创建DbContext，数据迁移用的）中，从NuGet中安装<code>Volo.Abp.EntifyFrameworkCore.MySql</code></p><p>第二步，打开<code>TGDbContextFactory.cs</code></p><p>第三部，修改代码：</p><pre><code>public TGDbContext CreateDbContext(string[] args)&#123;    var configuration = BuildConfiguration();    var builder = new DbContextOptionsBuilder&lt;TGDbContext&gt;()        .UseSqlServer(configuration.GetConnectionString(&quot;Default&quot;));    return new TGDbContext(builder.Options);&#125;</code></pre><p>改成</p><pre><code>public TGDbContext CreateDbContext(string[] args)&#123;    var configuration = BuildConfiguration();    var builder = new DbContextOptionsBuilder&lt;TGDbContext&gt;()        .UseMySQL(configuration.GetConnectionString(&quot;Default&quot;));    return new TGDbContext(builder.Options);&#125;</code></pre><p>原本以为这样就能ok的，update-database的时候一堆错误，去issue上看了下，都有这个问题，有人建议用Pomele的MySql驱动，还提了PR，当我今天(3月9号)去看的时候PR已经通过，但Nuget包还未更新。</p><p>自给自足丰衣足食，自己来吧，其实非常简单</p><p>先去掉刚引入的<code>Volo.Abp.EntityFrameworkCore.MySql</code>,然后引入<code>Pomelo.EntityFrameworkCore.MySql</code>,随后上述代码改为：</p><pre><code>public TGDbContext CreateDbContext(string[] args)&#123;    var configuration = BuildConfiguration();    var builder = new DbContextOptionsBuilder&lt;TGDbContext&gt;()        .UseMySql(configuration.GetConnectionString(&quot;Default&quot;));    return new TGDbContext(builder.Options);&#125;</code></pre><p>ok，简单改造完成，我们再来update-database，我们的创建顺利的完成了。</p><p>你以为结束了吗，幼稚！默认启动的时候他还是会选择Sql Server，我们看下代码，在<code>Web</code>项目下的<code>xxWebModule.cs</code>，xx是你的项目名，这个是我们web的Module文件，我们知道Abp是一个Module加载的框架。在这个项目中同样引入<code>Pomelo.EntityFrameworkCore.MySql</code>，随后修改<code>ConfigureDatabaseServices</code>方法，</p><pre><code>private void ConfigureDatabaseServices()&#123;    Configure&lt;AbpDbContextOptions&gt;(options =&gt;    &#123;        options.Configure(context =&gt;        &#123;            if (context.ExistingConnection != null)            &#123;                context.DbContextOptions.UseMySql(context.ExistingConnection);            &#125;            else            &#123;                context.DbContextOptions.UseMySql(context.ConnectionString);            &#125;        &#125;);    &#125;);&#125;</code></pre><p>改完以上的代码，你就可以顺利启动Abp vNext for MySql了。</p><p>改的不是很优雅，毕竟下一个版本应该会解决这个问题。之前用Abp Core做了小程序并放到了生产环境，启动慢了点，但是运行什么都比较稳定，开发也比较便捷，看了Abp vNext后，感觉一种小清新，相信在不久之后，我会使用它放到生产环境。其实一些老鸟的话，自己都有自己的框架，说实在的，Abp的好处就在于能够让大家有一种统一的快速的开发方式。</p><p>PS：陪儿子写字写了3个小时，写1个字发呆5分钟以上，能理解这种痛苦吗？</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Abp vNext是Abp的下一代版本，目前还在经一步完善，代码已经全部重写了，好的东西保留了下来，去除了很多笨重的东西，从官宣来看，Abp vNext主要是为了以后微服务架构而诞生的。&lt;/p&gt;
+&lt;p&gt;从源码来看，Abp vNext已经支持了多种数据库，Sql Server</summary>
+      
+    
+    
+    
+    <category term="abp" scheme="http://www.jamesying.com/categories/abp/"/>
+    
+    
+    <category term="Asp.Net Core" scheme="http://www.jamesying.com/tags/Asp-Net-Core/"/>
+    
+    <category term="SignalR" scheme="http://www.jamesying.com/tags/SignalR/"/>
+    
+    <category term="微信" scheme="http://www.jamesying.com/tags/%E5%BE%AE%E4%BF%A1/"/>
+    
+    <category term="abp" scheme="http://www.jamesying.com/tags/abp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在Asp.Net Core中使用DI的方式使用Hangfire构建后台执行脚本</title>
+    <link href="http://www.jamesying.com/2020/09/02/hangfire-di-on-dot-net-core/"/>
+    <id>http://www.jamesying.com/2020/09/02/hangfire-di-on-dot-net-core/</id>
+    <published>2020-09-02T13:06:14.000Z</published>
+    <updated>2020-10-02T13:07:08.974Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近项目中需要用到后台Job，原有在Windows中我们会使用命令行程序结合计划任务或者直接生成Windows Service，现在.Net Core跨平台了，虽然Linux下也有计划任务，但跟原有方式一样，没撒图形界面，执行结果之类的只能去服务器查看日志。<br>看了下Hangfire，基本满足于现有需求，有图形UI，注册后台Job也非常简便，考虑之下，就是用它了。</p><h1 id="安装注册"><a href="#安装注册" class="headerlink" title="安装注册"></a>安装注册</h1><p>Hangfire的使用也非常简单，在项目中先安装Hangfire包：</p><pre><code>PM&gt; Install-Package Hangfire</code></pre><p>Asp.Net Core项目的话，打开Startup.cs，在<code>ConfigureServices</code>方法中添加注册：</p><pre><code>services.AddHangfire(x =&gt; x.UseSqlServerStorage(&quot;connection string&quot;));</code></pre><p><code>connection string</code>是数据库连接字符串，我用的时Sql Server，你也可以使用Redis，Mysql等其他数据库。</p><p>注册完成后，我们在Configure方法中，添加如下代码：</p><pre><code>app.UseHangfireServer();app.UseHangfireDashboard();</code></pre><p>好了，等项目启动之后，Hangfire先Migration相关数据结构，项目启动之后，可以通过项目地址+<code>/Hangfire</code>查看是否运行成功，看到如下界面基本没有问题了。<br><img src="https://github.com/JamesYing/mpdevclass/blob/master/blogs/20180624121943.png?raw=true" alt="image"></p><h1 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h1><p>Hangfire的使用非常简单，基本上使用以下几个静态方法：</p><pre><code>//执行后台脚本，仅执行一次BackgroundJob.Enqueue(() =&gt; Console.WriteLine(&quot;Fire-and-forget!&quot;)); //延迟执行后台脚本呢，仅执行一次BackgroundJob.Schedule(    () =&gt; Console.WriteLine(&quot;Delayed!&quot;),    TimeSpan.FromDays(7));//周期性任务RecurringJob.AddOrUpdate(    () =&gt; Console.WriteLine(&quot;Recurring!&quot;),    Cron.Daily);//等上一任务完成后执行BackgroundJob.ContinueWith(    jobId,  //上一个任务的jobid    () =&gt; Console.WriteLine(&quot;Continuation!&quot;));</code></pre><h1 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h1><p>在.Net Core中处处是DI，一不小心，你会发现你在使用Hangfire的时候会遇到各种问题，比如下列代码：</p><pre><code>public class HomeController : Controller&#123;    private ILogger&lt;HomeController&gt; _logger;    public HomeController(ILoggerFactory loggerFactory)    &#123;        _logger = loggerFactory.CreateLogger&lt;HomeController&gt;();    &#125;    public IActionResult Index()    &#123;        _logger.LogInformation(&quot;start index&quot;);        BackgroundJob.Enqueue(() =&gt; _logger.LogInformation(&quot;this a job!&quot;));        return View();    &#125;&#125;</code></pre><p>项目启动后，你能正常访问，但在Hangfire后台你会看到如下错误：</p><p><img src="https://github.com/JamesYing/mpdevclass/blob/master/blogs/20180624123053.png?raw=true" alt="image"><br>错误信息呢大概意思是不能使用接口或者抽象方法类，其实就是因为Hangfire没有找到实例，那如何让Hangfire支持DI呢？</p><p>我们先创建一个<code>MyActivator</code>类，使其继承<code>Hangfire.JobActivator</code>类，代码如下：</p><pre><code>public class MyActivator : Hangfire.JobActivator&#123;    private readonly IServiceProvider _serviceProvider;    public MyActivator(IServiceProvider serviceProvider) =&gt; _serviceProvider = serviceProvider;    public override object ActivateJob(Type jobType)    &#123;        return _serviceProvider.GetService(jobType);    &#125;&#125;</code></pre><p>重写了ActivateJob方法，使其返回的类型从我们的IServiceProvider中获取。</p><p>我们试着写两个后台脚本，CheckService和TimerService，CheckService的Check方法在执行计划时，会再次调用Hangfire来定时启动TimerService：    </p><p>CheckService:</p><pre><code>public interface ICheckService&#123;    void Check();&#125;public class CheckService : ICheckService&#123;    private readonly ILogger&lt;CheckService&gt; _logger;    private ITimerService _timeservice;    public CheckService(ILoggerFactory loggerFactory,        ITimerService timerService)    &#123;        _logger = loggerFactory.CreateLogger&lt;CheckService&gt;();        _timeservice = timerService;    &#125;    public void Check()    &#123;        _logger.LogInformation($&quot;check service start checking, now is &#123;DateTime.Now&#125;&quot;);        BackgroundJob.Schedule(() =&gt; _timeservice.Timer(), TimeSpan.FromMilliseconds(30));        _logger.LogInformation($&quot;check is end, now is &#123;DateTime.Now&#125;&quot;);    &#125;&#125;</code></pre><p>TimerService:</p><pre><code>public interface ITimerService&#123;    void Timer();&#125;public class TimerService : ITimerService&#123;    private readonly ILogger&lt;TimerService&gt; _logger;    public TimerService(ILoggerFactory loggerFactory)    &#123;        _logger = loggerFactory.CreateLogger&lt;TimerService&gt;();    &#125;    public void Timer()    &#123;        _logger.LogInformation($&quot;timer service is starting, now is &#123;DateTime.Now&#125;&quot;);        _logger.LogWarning(&quot;timering&quot;);        _logger.LogInformation($&quot;timer is end, now is &#123;DateTime.Now&#125;&quot;);    &#125;&#125;</code></pre><p>目前还无法使用，我们必须在<code>Startup</code>中注册这2个service：</p><pre><code>services.AddScoped&lt;ITimerService, TimerService&gt;();services.AddScoped&lt;ICheckService, CheckService&gt;();</code></pre><p>我们在<code>HomeController</code>修改以下：</p><pre><code>public IActionResult Index()&#123;    _logger.LogInformation(&quot;start index&quot;);    BackgroundJob.Enqueue&lt;ICheckService&gt;(c =&gt; c.Check());    return View();&#125;</code></pre><p>好，一切就绪，只差覆盖原始的Activator了，我们可以在<code>Startup.cs</code>中的<code>Configure</code>方法中使用如下代码：</p><pre><code>public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)&#123;    GlobalConfiguration.Configuration.UseActivator&lt;MyActivator&gt;(new MyActivator(serviceProvider));    ……    ……&#125;</code></pre><blockquote><p>默认情况下Configure方法时没有IServiceProvider参数的，请手动添加</p></blockquote><p>再次启动，我们的Job就会成功执行，截图如下：<br><img src="https://github.com/JamesYing/BlogsRelatedCodes/blob/master/images/20180624125657.png?raw=true" alt="image"></p><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul><li>Hangfire 官网：<a href="https://www.hangfire.io/">https://www.hangfire.io/</a></li><li>Hangfire DI in .net core : <a href="https://stackoverflow.com/questions/41829993/hangfire-dependency-injection-with-net-core">https://stackoverflow.com/questions/41829993/hangfire-dependency-injection-with-net-core</a></li><li>Demo 地址：<a href="https://github.com/JamesYing/BlogsRelatedCodes/tree/master/hangfireDemo">https://github.com/JamesYing/BlogsRelatedCodes/tree/master/hangfireDemo</a></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;最近项目中需要用到后台Job，原有在Windows中我们会使用命令行程序结合计划任务或者直接生成Windows Service，现在.Net Core跨平台了，虽然Linux下也有计划任务，但跟原有方式一样，没撒图形界面，执行结果之类的只能去服务器查看日志。&lt;br&gt;看了下H</summary>
+      
+    
+    
+    
+    <category term=".Net_Core" scheme="http://www.jamesying.com/categories/Net-Core/"/>
+    
+    
+    <category term=".Net Core" scheme="http://www.jamesying.com/tags/Net-Core/"/>
+    
+    <category term="DI" scheme="http://www.jamesying.com/tags/DI/"/>
+    
+    <category term="hangfire" scheme="http://www.jamesying.com/tags/hangfire/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Asp.Net Core SignalR 与微信小程序交互笔记</title>
+    <link href="http://www.jamesying.com/2020/09/02/signalr-wechat-miniapp/"/>
+    <id>http://www.jamesying.com/2020/09/02/signalr-wechat-miniapp/</id>
+    <published>2020-09-02T07:09:05.000Z</published>
+    <updated>2020-09-30T12:28:35.632Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="什么是Asp-Net-Core-SignalR"><a href="#什么是Asp-Net-Core-SignalR" class="headerlink" title="什么是Asp.Net Core SignalR"></a>什么是Asp.Net Core SignalR</h1><p>Asp.Net Core SignalR 是微软开发的一套基于Asp.Net Core的与Web进行实时交互的类库，它使我们的应用能够实时的把数据推送给Web客户端。</p><h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><ul><li>自动管理连接</li><li>允许同时广播到所有客户端</li><li>也可以广播到指定的组或者特定的客户端</li><li>在Github上开源，<a href="https://github.com/aspnet/signalr">传送门</a></li></ul><p>SignalR 提供了多种连接方式，在现代化应用中，WebSocket是最佳的传输协议，在客户端无法实现WebSocket协议的时候，SignalR就会采取其他方式，比如Server-Sent或者长轮询（在ws未出现之前，我们讨论的推拉模式）</p><h2 id="中心-Hubs"><a href="#中心-Hubs" class="headerlink" title="中心 Hubs"></a>中心 Hubs</h2><p>SignalR是采用中心客户端和服务器进行通讯。</p><p>中心是一种高级的管道，允许客户端和服务器之间相互调用方法。</p><p>中心通过强类型参数传递给方法，进行模型绑定</p><h3 id="Hubs-Clients"><a href="#Hubs-Clients" class="headerlink" title="Hubs.Clients"></a>Hubs.Clients</h3><p>Clients属性包含了所有的客户端连接信息，它包含了3个属性：</p><ul><li><code>All</code> 所有客户端</li><li><code>Caller</code> 进行此次请求的客户端</li><li><code>Others</code> 排除此次请求客户端的其他客户端<br>包含了多个方法：<br>= <code>AllExcept</code>    在指定的连接除外的所有连接的客户端上调用方法</li><li><code>Client</code>    在特定连接的客户端上调用方法</li><li><code>Clients</code>    在特定连接的客户端上调用方法</li><li><code>Group</code>    调用指定的组中的一种对所有连接方法</li><li><code>GroupExcept</code>    调用中指定的组，除非指定连接到的所有连接的方法</li><li><code>Groups</code>    调用一种对多个组的连接方法</li><li><code>OthersInGroup</code>    调用一种对一组的连接，不包括客户端调用 hub 方法方法</li><li><code>User</code>    调用一种对与特定用户关联的所有连接方法</li><li><code>Users</code>    调用一种对与指定的用户相关联的所有连接方法</li></ul><p>每个属性和方法返回的对象都包含一个<code>SendAsync</code>方法，可以对客户端进行调用。</p><h2 id="HubContext"><a href="#HubContext" class="headerlink" title="HubContext"></a>HubContext</h2><p>可以在应用其他地方通过使用IHubContext，达到调用Hub的目的。</p><h2 id="两种协议"><a href="#两种协议" class="headerlink" title="两种协议"></a>两种协议</h2><ul><li>文本协议：JSON</li><li>二进制协议：<a href="https://msgpack.org/">MessagePack</a></li></ul><p>MessagePack类似于JSON，但传输比JSON更快，数据大小比JSON更小</p><h2 id="服务器事项"><a href="#服务器事项" class="headerlink" title="服务器事项"></a>服务器事项</h2><ul><li>创建的Hub必须继承<code>Microsoft.AspNetCore.SignalR.Hub</code>,Hub类已经包含了管理连接、组和发送接收消息的属性及事件</li><li>在Hub中使用的方法应该尽量使用异步的方式，因为SignalR在发送和接收消息的时候使用的是异步方法。</li><li>在<code>Startup.ConfigureServices</code>中通过<code>services.AddSignalR</code>对SignalR进行注册</li><li>在<code>Startup.Configure</code>中通过<code>app.UseSignalR</code>方法对Hub路由进行配置</li></ul><h2 id="代码解析"><a href="#代码解析" class="headerlink" title="代码解析"></a>代码解析</h2><p><a href="https://docs.microsoft.com/en-us/aspnet/core/tutorials/signalr?view=aspnetcore-2.1&tabs=visual-studio">微软官方示范</a>中的ChatHub：</p><pre><code>using Microsoft.AspNetCore.SignalR;using System.Threading.Tasks;namespace SignalRChat.Hubs&#123;    public class ChatHub : Hub    &#123;        //服务端方法        public async Task SendMessage(string user, string message)        &#123;            //ReceiveMessage 为客户端方法，让所有客户端调用这个方法            await Clients.All.SendAsync(&quot;ReceiveMessage&quot;, user, message);        &#125;    &#125;&#125;</code></pre><p>上述代码为当收到客户端发来的<code>SendMessage</code>请求后（发送聊天信息），我们把消息发送到所有客户端，让他们调用自身的<code>ReceiveMessage</code>方法。</p><h2 id="用户标识"><a href="#用户标识" class="headerlink" title="用户标识"></a>用户标识</h2><p>通常情况下，在用户进行连接后，Connection会保存用户的用户标识，以便对特定用户进行发送消息。</p><p>可以实现<code>IUserIdProvider</code>来自定义获取用户的方法，例如：</p><pre><code>public class CustomUserIdProvider : IUserIdProvider&#123;    public virtual string GetUserId(HubConnectionContext connection)    &#123;        return connection.User?.FindFirst(ClaimTypes.Email)?.Value;    &#125;&#125;</code></pre><p>在<code>Startup.ConfigureServices</code>中注册：</p><pre><code>    services.AddSingleton&lt;IUserIdProvider, CustomUserIdProvider&gt;();</code></pre><h2 id="Group-分组"><a href="#Group-分组" class="headerlink" title="Group 分组"></a>Group 分组</h2><p>分组类似于聊天室中的每个房间，通过分组，我们可以给特定小组发送消息。</p><blockquote><p>用户标识和组名称都是区分大小写的。</p></blockquote><h1 id="微信小程序与SignalR交互"><a href="#微信小程序与SignalR交互" class="headerlink" title="微信小程序与SignalR交互"></a>微信小程序与SignalR交互</h1><p>小程序因为无法直接使用websocket，所以无法使用signalR.js，你可以试着把signalR.js中的webcosket使用部分换成wx.xxSocketxxx。</p><p>在参考了<a href="http://blog.lishewen.com/">算神</a>的<a href="https://github.com/lishewen/WeChatMiniAppSignalRClient">代码</a>后，归了一个小类库，方便大家使用，源码较长，我放到了github上，点击【<a href="https://github.com/JamesYing/signalR4Miniapp">传送门</a>】进入。</p><h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><h3 id="调用类库"><a href="#调用类库" class="headerlink" title="调用类库"></a>调用类库</h3><p>在要使用的页面上：</p><pre><code>///引入这个类库var signalR = require(&#39;../../lib/signalr/signalr.js&#39;)///实例化一个对象let _client = new signalR.signalR();</code></pre><h3 id="创建-一个映射方法"><a href="#创建-一个映射方法" class="headerlink" title="创建 一个映射方法"></a>创建 一个映射方法</h3><p>这是为了让小程序收到SignalR的消息之后进行回调</p><pre><code>callMethods(methods, args) &#123;        console.log(methods, args);        let self = this;        switch (methods) &#123;            case &#39;sayHello&#39;:                self.sayHello(args[0]);                break;        &#125;    &#125;,</code></pre><p>例子里有一个sayHello方法，我们用字符串作为key。</p><h3 id="进行连接"><a href="#进行连接" class="headerlink" title="进行连接"></a>进行连接</h3><pre><code>_client.connection(url, methodMapping);</code></pre><ul><li>url : signalR服务器</li><li>methodMapping : 方法和字符串之间的Mapping</li></ul><h3 id="调用SignalR方法"><a href="#调用SignalR方法" class="headerlink" title="调用SignalR方法"></a>调用SignalR方法</h3><pre><code> _client.call(methodName, args, success, fail)</code></pre><ul><li>methodName:远程方法名</li><li>args：参数，<strong>这里注意一定要数组格式</strong></li><li>success：调用成功后的回调</li><li>fail：失败后的回调</li></ul><h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>最近真的忙，忙成一道闪电，正好遇到这个问题随之记录下。类库可能并不完善，你可以在github上提issue，我会跟进的，有好的修改方式，你也可以PR我。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;什么是Asp-Net-Core-SignalR&quot;&gt;&lt;a href=&quot;#什么是Asp-Net-Core-SignalR&quot; class=&quot;headerlink&quot; title=&quot;什么是Asp.Net Core SignalR&quot;&gt;&lt;/a&gt;什么是Asp.Net Core S</summary>
+      
+    
+    
+    
+    <category term=".Net_Core" scheme="http://www.jamesying.com/categories/Net-Core/"/>
+    
+    
+    <category term=".Net Core" scheme="http://www.jamesying.com/tags/Net-Core/"/>
+    
+    <category term="SignalR" scheme="http://www.jamesying.com/tags/SignalR/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Asp.Net Core SignalR 用泛型Hub优雅的调用前端方法及传参</title>
+    <link href="http://www.jamesying.com/2020/09/01/signalR-core-grace-call-client-methods/"/>
+    <id>http://www.jamesying.com/2020/09/01/signalR-core-grace-call-client-methods/</id>
+    <published>2020-09-01T07:07:23.000Z</published>
+    <updated>2020-09-30T12:28:35.632Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="继续学习"><a href="#继续学习" class="headerlink" title="继续学习"></a>继续学习</h2><p>最近一直在使用Asp.Net Core SignalR(下面成SignalR Core)为小程序提供websocket支持,前端时间也发了一个<a href="https://www.cnblogs.com/inday/p/signalr-wechat-miniapp.html">学习笔记</a>，在使用过程中稍微看了下它的源码,不得不说微软现在真的强大,很多事情都帮你考虑到了,比如使用Redis,使用Redis后,你的websocket就支持横向扩展了,使用的方式也特别简单,只需要在<code>services.AddSignalR</code>的后面再加上:</p><pre><code>.AddRedis(options =&gt;&#123;    options.Configuration.ConnectTimeout = 30;    options.Configuration.EndPoints.Add(&quot;redis ip&quot;);&#125;)</code></pre><p>SignalR Core利用了Redis的发布订阅功能,就实现了横向扩展,再也不用担心一台ws服务器不够用了.</p><p>今天要说的并不是SignalR Core的负载均衡方式,而是如何优雅的调用前端方法。大家都知道SignalR Core除了可以建立websocket连接，还能双向调用，服务器调用客户端方法，客户端也能调用服务器的方法。</p><h2 id="原始调用"><a href="#原始调用" class="headerlink" title="原始调用"></a>原始调用</h2><p>我们看下如何调用客户端方法：</p><pre><code>public class ChatHub : Hub&#123;    //服务端方法    public async Task SendMessage(string user, string message)    &#123;        //ReceiveMessage 为客户端方法，让所有客户端调用这个方法        await Clients.All.SendAsync(&quot;sayHello&quot;, user, message);    &#125;&#125;</code></pre><p>还是ChatHub<del>~</del></p><p>我们可以看到在这里我们调用了客户端的sayHello,并传递了两个字符串参数user,message,是不是觉得丑陋,说实在的真心看不下去哈。而且不变维护，相当于你要把方法名硬编码，传递多少个参数也没有个准，没有好的文档后期很难维护。好在微软已经为我们考虑到了这个情况，我们可以把客户端的方法用接口的方法定义了！！！对！没错，用接口的方式定义客户端的方法！！</p><h2 id="优雅调用"><a href="#优雅调用" class="headerlink" title="优雅调用"></a>优雅调用</h2><p>使用的方式也超级简单，我们先定义一个客户端的接口：</p><pre><code>public interface IMyClient&#123;    Task SayHello(string user, string message);&#125;</code></pre><p>然后我们的Hub集成Hub<T>，T就是你定义的客户端接口，这里也就是IMyClient，我用上面的ChatHub举例：</p><pre><code>public class SendMessageHub : Hub&lt;IMyClient&gt;&#123;    public async Task SendMessage(string user, string message)    &#123;        await this.Clients.All.SayHello(user, &quot;from server:&quot; + message);        //ReceiveMessage 为客户端方法，让所有客户端调用这个方法        //await Clients.All.SendAsync(&quot;sayHello&quot;, user, message);    &#125;&#125;</code></pre><p>注释掉的是我之前的方式，SayHello是客户端的方法，会通过websocket传递到前端，下图为我用小程序通讯产生的结果：<br><img src="https://github.com/JamesYing/mpdevclass/blob/master/blogs/20180906215111.png?raw=true" alt="image"><br>是不是SoEasy？？我觉得还不算完，我们参数目前是按照数组的方式传递的，如果有限定的参数名就完美了，我们改造下IMyClient：</p><pre><code>public interface IMyClient&#123;    Task SayHello(HelloMessage message);&#125;public class HelloMessage&#123;    public string User &#123; get; set; &#125;    public string Message &#123; get; set; &#125;&#125;</code></pre><p>修改下我们的Hub的SendMessage方法：</p><pre><code>public  Task SendMessage(string user, string message)&#123;    return this.Clients.All.SayHello(new HelloMessage()    &#123;        User = user,        Message = &quot;from server:&quot; + message    &#125;);    //return this.Clients.All.SendAsync(&quot;sayHello&quot;, $&quot;from server:&#123;message&#125;&quot;);&#125;</code></pre><p>在运行下我们的小程序：<br><img src="https://github.com/JamesYing/mpdevclass/blob/master/blogs/20180906220201.png?raw=true" alt="image"><br>LooK，方法名没有改变，但是我们返回的参数成了一个对象，如果看过我之前<a href="https://www.cnblogs.com/inday/p/signalr-wechat-miniapp.html">那篇博文</a>的话，应该记得在前端的时候，我需要做一个映射，来调用前端的方法，在映射中，我参数使用的是数组进行传递的，现在不需要去看数组中第几个参数是我需要使用的了，你完全可以使用：</p><pre><code>callMethods(methods, args) &#123;    console.log(methods, args);    let self = this;    let arg = args[0];    switch (methods) &#123;        case &#39;SayHello&#39;:            self.sayHello(arg.message);            break;    &#125;&#125;,</code></pre><p>这里还有个问题，就是接口中的方法名是大写开头的，而js的规范呢一般都是小写开头的，所以在映射方法的时候需要注意下，反正这个大小写问题有点不是很爽，参数在传递的时候倒是直接转换成首字母小写，我相信SignalR Core是可以实现的，只是我不知道而已，稍后在研究研究，如果可行，我会更新此篇博文。如果你要在接口中用小写来定义这个方法，也没有问题，但我觉得就是不符合规范，习惯不允许我如此粗糙，哈哈。</p><h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>至于调用的原理，我没有细看，正好在看源码的时候，看到了Hub<T>，很疑惑，尝试了下后才发觉SignalR的牛逼，后来发现其实在SignalR 2.1中引用了这个概念，估计很多人已经在用了，但好像提到的人很少，包括微软的文档，这次也是意外发现，赶快记录下来，希望对您有用。</p><p>Asp.Net Core SignalR确实很强大，有兴趣的可以去<a href="https://github.com/aspnet/SignalR">gayhub</a>上去研究下他们的源码。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;继续学习&quot;&gt;&lt;a href=&quot;#继续学习&quot; class=&quot;headerlink&quot; title=&quot;继续学习&quot;&gt;&lt;/a&gt;继续学习&lt;/h2&gt;&lt;p&gt;最近一直在使用Asp.Net Core SignalR(下面成SignalR Core)为小程序提供websocket支持,</summary>
+      
+    
+    
+    
+    <category term=".Net_Core" scheme="http://www.jamesying.com/categories/Net-Core/"/>
+    
+    
+    <category term=".Net Core" scheme="http://www.jamesying.com/tags/Net-Core/"/>
+    
+    <category term="SignalR" scheme="http://www.jamesying.com/tags/SignalR/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>给Ocelot打造一个Docker镜像</title>
+    <link href="http://www.jamesying.com/2020/08/30/Make-a-docker-image-for-ocelot/"/>
+    <id>http://www.jamesying.com/2020/08/30/Make-a-docker-image-for-ocelot/</id>
+    <published>2020-08-30T03:28:10.000Z</published>
+    <updated>2020-09-30T12:28:35.629Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>在微服务架构中，ApiGateway起到了承前启后，不仅可以根据客户端进行分类，也可以根据功能业务进行分类，而且对于服务调用服务也起到了很好的接口作用。目前在各个云端中，基本上都提供了ApiGateway的功能（付费功能），通过SDK或者在线进行配置。<br>在Java体系中有<a href="https://github.com/Netflix/zuul">Zuul</a>和<a href="https://github.com/Kong/kong">Kong</a>都是比较著名的。<br>在.Net体系中，目前比较热门的（短短1年时间已经1000+stars了）<br><a href="https://github.com/TomPallister/Ocelot">Ocelot</a>，这是一个非常优秀的基于 .Net Core的Api网关开源项目，我们的在<a href="https://www.cnblogs.com/shanyou">队长</a>也参与了开发，过年前又被纳入了微软<a href="https://github.com/dotnet-architecture/eShopOnContainers">eShop</a>微服务架构Demo项目中，作为其Api网关，目前正在整合中，有兴趣可以关注项目中新的的<a href="https://github.com/dotnet-architecture/eShopOnContainers/tree/ocelot">Ocelot Branch</a>。</p><p>基本的使用方式在园中已有<a href="http://www.cnblogs.com/ibeisha/p/ocelot.html">博主</a>写过了，不过内容是之前版本的，新版本稍微有点不同，还是建议大家看<a href="http://ocelot.readthedocs.io/en/latest/">文档</a>。通过文档我们了解，Ocelot是通过一个json文件进行配置的，所以在使用的时候我们只需要修改这个json文件就可以了，每次为不同的ApiGateway创建不同的项目比较麻烦，So，今天来讲下如何把Ocelot做成一个Docker镜像，这样使用的时候只需要输入一条docker指令即可。</p><blockquote><p>今天的Dockerfile我是Fork了Ocelot项目后在自己的<a href="https://github.com/JamesYing/Ocelot/tree/latest-old/">Branch</a>中弄的，直接是项目引用，这只是范例而已，你可以重新创建一个专门的项目，通过Nuget管理添加对Ocelot的引用。</p></blockquote><h1 id="创建Dockerfile代码"><a href="#创建Dockerfile代码" class="headerlink" title="创建Dockerfile代码"></a>创建Dockerfile代码</h1><p>Dockerfile只是一个文本文件，它每一行代表Docker镜像的一个layer，每一行由命令加参数组成，我们通过编写简单的命令，就能使用docker工具生成docker镜像。<br>首先你要在项目中创建Dockerfile，请记住，把你的Dockerfile放在sln目录下，因为Dockerfile文件的build环境是按照你这个文件的目录来的，切记，博主之前花了N天才发现这个弱智的问题。docker command对文件名对大小写敏感。</p><p>直接上代码：</p><pre><code>FROM microsoft/aspnetcore:2.0 AS base #基于asp.net core 2.0镜像WORKDIR /appEXPOSE 80# 先使用asp.net core build镜像，然后复制项目到/src目录FROM microsoft/aspnetcore-build:2.0 AS buildWORKDIR /srcCOPY *.sln ./COPY demos/ApiGateway.Web/ApiGateway.Web.csproj demos/ApiGateway.Web/COPY src/Ocelot/Ocelot.csproj src/Ocelot/RUN dotnet restoreCOPY . .WORKDIR /src/demos/ApiGateway.WebRUN dotnet add package BuildBundlerMinifier#这里添加了对bundle的支持，你可以不使用，因为我更改了样式，所以这里加上了这个。RUN dotnet restoreRUN dotnet build -c Release -o /app# 编译以后，我们进行发布，并直接复制到app目录FROM build AS publishRUN dotnet publish -c Release -o /app# 设定app目录为工作目录FROM base AS finalWORKDIR /appCOPY --from=publish /app .# 挂载/app/configurations目录VOLUME /app/ConfigurationsENTRYPOINT [&quot;dotnet&quot;, &quot;ApiGateway.Web.dll&quot;]</code></pre><p>上面就是我的Dockerfile文件了，我在项目中并没有把configuration.json文件放到项目根目录，而是另外创建了一个Configurations目录，这样我挂载目录，可以在多个容器中共享数据。</p><h1 id="生成Docker镜像"><a href="#生成Docker镜像" class="headerlink" title="生成Docker镜像"></a>生成Docker镜像</h1><p>如果你的机器上装了Docker，那可以通过命令工具，在项目的根目录运行：</p><pre><code>docker build -t myocelot:v1 .</code></pre><p>注意这个命令后的.一定不要忘记哦</p><p>如果你机器上没有安装Docker，也没有关系，可以通过Docker仓库或者阿里云的容器管理进行生成，他们都是免费的，博主使用的是阿里云容器管理创建的，这样每次代码改动，它会自动生成新的镜像。</p><h1 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h1><p>当我们有了镜像后，就可以运行容器了，因为博主用的是阿里云容器管理，所以我需要先把镜像pull到运行环境（我用的是阿里云ECS）</p><pre><code>docker pull registry.cn-hangzhou.aliyuncs.com/jamesying/ocelot-demodocker tag registry.cn-hangzhou.aliyuncs.com/jamesying/ocelot-demo myocelot:v1</code></pre><p>博主通过pull命令拉了镜像后又通过tag命令重新命名了tagname。</p><p>随后我们创建一个ocelot的配置文件目录,并创建configurations.json文件：</p><pre><code>mkdir /home/ocelottouch /home/ocelot/configurations.json</code></pre><p>下面通过vi工具配置你自己的config，下面是博主的：</p><pre><code>&#123;  &quot;ReRoutes&quot;: [    &#123;      &quot;DownstreamPathTemplate&quot;: &quot;/api/values/&#123;id&#125;&quot;,      &quot;DownstreamScheme&quot;: &quot;http&quot;,      &quot;DownstreamHostAndPorts&quot;: [        &#123;          &quot;Host&quot;: &quot;localhost&quot;,          &quot;Port&quot;: 6002        &#125;,        &#123;          &quot;Host&quot;: &quot;localhost&quot;,          &quot;Port&quot;: 6001        &#125;      ],      &quot;LoadBalancer&quot;: &quot;RoundRobin&quot;,      &quot;UpstreamPathTemplate&quot;: &quot;/api/v1/values/&#123;id&#125;&quot;,      &quot;DownstreamHealthcheckPath&quot;: &quot;/hc?apikey=testapi&quot;,      &quot;UpstreamHttpMethod&quot;: [ &quot;GET&quot;, &quot;Put&quot;, &quot;Delete&quot; ]    &#125;  ],  &quot;GlobalConfiguration&quot;: &#123;&#125;&#125;</code></pre><p>后面我们来运行容器：</p><pre><code>docker run --name myocelot -p 6008:80 -v /home/ocelot:/app/configurations -d ocelot:v1</code></pre><p>成功运行以后，我们就可以通过6008端口访问了，你可以通过 <a href="http://ocelot.jcsoft.xyz:6008/">http://ocelot.jcsoft.xyz:6008</a> 看下Demo。下图为演示截图：<br><img src="http://images.cnblogs.com/cnblogs_com/inday/14896/o_TIM%e6%88%aa%e5%9b%be20180224162737.png" alt="image"></p><h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>为什么会有这个镜像呢，因为通过镜像生成很简单，而且配置文件更改后，只需要docker restart myocelot就能重新加载，非常简便。今天的内容很简单，但很实用，当然这个镜像还是有点欠缺的，因为Ocelot有很多功能，还需要在Startup.cs中注册一些service才可以使用，博主有个想法，弄个专门的Ocelot Demo，只需要通过config文件就能自动注册相应服务。</p><p>或许你从Demo中看到了楼主对Ocelot的改动，楼主增加了 <code>DownstreamHealthcheckPath</code>属性，这个是为了对下游服务器进行Healthcheck的，而且楼主也PR给了Ocelot的项目负责人，不过Tom不太清楚这个属性有何用，所以我准备做个Demo给他看下，这个属性很有用，除了可以通过试图查看下游服务器状态，同时也可以在LoadBalance的时候把无效的服务器给忽略掉。</p><p>大家觉得Healthcheck是否有必要呢？</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h1&gt;&lt;p&gt;在微服务架构中，ApiGateway起到了承前启后，不仅可以根据客户端进行分类，也可以根据功能业务进行分类，而且对于服务调用</summary>
+      
+    
+    
+    
+    <category term=".Net_Core" scheme="http://www.jamesying.com/categories/Net-Core/"/>
+    
+    
+    <category term="Asp.Net Core" scheme="http://www.jamesying.com/tags/Asp-Net-Core/"/>
+    
+    <category term="Kestrel" scheme="http://www.jamesying.com/tags/Kestrel/"/>
+    
+    <category term=".Net Core" scheme="http://www.jamesying.com/tags/Net-Core/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>单体服务架构-一种新型的适合中小型企业的服务架构</title>
+    <link href="http://www.jamesying.com/2020/04/30/Single-Service-Architecture-Intro/"/>
+    <id>http://www.jamesying.com/2020/04/30/Single-Service-Architecture-Intro/</id>
+    <published>2020-04-29T16:00:00.000Z</published>
+    <updated>2020-09-30T12:28:35.630Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>好久好久没写了，最近刚换了工作，花了几天的时候熟悉了项目，接着就是功能的完善，随后就是对新项目的基础架构搭建。</p><p>看过Po主博客的都知道，Po主一直致力于推广.Net Core在微服务架构上的实践，包括从去年年底开始也正在写一本关于此类的书（目前还在写的阶段，不便公布）。换新东家的目的也是如此，公司是个集团公司，但楼主负责的项目还不是很大，So，微服务架构可能现阶段还无法实现。</p><p>但Po主一心向往微服务架构，所以我在搭建基础架构的时候，想到了一种过度架构方式，也不知道如何称呼，随心所欲称之为：单体服务架构（Single Service Architecture-简称SSA）</p><h1 id="什么是单体服务架构"><a href="#什么是单体服务架构" class="headerlink" title="什么是单体服务架构"></a>什么是单体服务架构</h1><p>什么是单体服务架构呢？总的来说，架构看上去类似于微服务架构，但它只包含了一个服务，我们的业务逻辑统统放到这一个服务来，简单画个图：<br><img src="https://github.com/JamesYing/jamesying.github.io/blob/master/img/201804/ssa-01.png?raw=true" alt="image"></p><p>怎么样，简单吧，我们来对比下eShop的架构图：<br><img src="https://user-images.githubusercontent.com/1712635/38758862-d4b42498-3f27-11e8-8dad-db60b0fa05d3.png" alt="image"></p><p>如何，看出什么了吗？我们的架构去除了Api gateway，去除了EventBus，把各个服务结合在了一起，形成了一个单一的服务，所以我称它为单体服务架构。</p><h1 id="为什么需要单体服务架构"><a href="#为什么需要单体服务架构" class="headerlink" title="为什么需要单体服务架构"></a>为什么需要单体服务架构</h1><p>可能大家好奇，为什么需要单体服务架构（后称SSA）呢？如果大家了解过微服务架构的话，应该听说过康威定理吧，或者说听说过“微服务架构不是银弹”类似的话吧，概论就是并不是所有企业所有项目都适合微服务架构。但在技术热潮之中，中小型企业都想加入微服务的队列，但如何是好呢？我想SSA可能是他们在完成微服务架构之前最好的选择吧。</p><p>Po主在设计新项目之前，也一直困惑，如何为以后的微服务做准备呢？新东家是一家集团公司，业务体系庞大，团队开发语言也是众多，就近一个月的观察来看，运维、开发、维护的成本相当高，未来走向微服务架构是必然的，而且公司找Po主来的目的也是如此。</p><p>正如之前所说，目前Po主负责的项目比较小，投入的资源也不是很大，Po在经过前期调研之后，觉得目前并不适合做成微服务架构，经过几天的思量，Po主想到了SSA，去除了很多复杂性，但保留了微服务架构的可扩展，可维护性，也为以后转型做准备。</p><p>从SSA的架构图中，你可以清晰的看到，我们有很多的clients，正是因为如此，所以我们需要SSA，如果你的项目只有一个Web，那简单的三层架构就足矣。在SSA中，我们的Inside Api Management为我们的clients提供了所需的Api，类似于Api Gateway，但包含了我们所有的业务逻辑。在SSA中，你可以像微服务架构一样，抛弃数据层，当然我是不建议这样，你可以使用封装好的SqlClient或者Orm框架来协助，结合IUnitOfWork和Repository模式，这样你的数据访问就会变得很简单了。</p><h1 id="SSA-VS-三层架构"><a href="#SSA-VS-三层架构" class="headerlink" title="SSA VS 三层架构"></a>SSA VS 三层架构</h1><p>可能你会问，为何不用三层架构呢？而且你的架构跟三层架构很像。</p><p>没错，Po主的想法其实就是把三层架构中的业务逻辑层给提取了出来，把业务逻辑封装起来，并提供标准化的Api接口为其他Clients提供业务或数据。</p><p>但为何选择SSA而不是三层架构呢？</p><p>相信这里几乎所有的开发者都使用过三层架构开发，C端引用我们的逻辑层，逻辑层引用数据层，ok，这是因为我们只需要考虑到一个C端。就拿新闻系统举例，一开始你需要的只是展示新闻内容，一个前端Web足矣，我们叫Web1。但为了维护，我们需要一个后台管理，我们叫Web2，这时候已经以后2个C端了，这时候，你可以新建一个web项目，引用之前的业务层。可随着业务发展，公司需求一个手机H5的站点，我们叫web3，这时候你会再建一个项目，使用一些前端的框架的SPA项目，然后和web2一样，引用之前的业务层。</p><p>好了，现在你有3个C端了，我想想，大概1个中级的开发应该能够应付，如果，我说如果，你的这个维护人员离职了，呵呵，我相信没有一定经验的是接手不了项目，至少在短期内无法适应。</p><p>我们继续，公司要求需要一个适应微信端的H5，我们叫web4， 一个小程序，我们叫wxapp， 一个安卓：androidApp， 一个苹果：iosApp。<br><img src="http://img5q.duitang.com/uploads/item/201501/23/20150123223822_wXdQx.thumb.700_0.gif" alt="image"></p><p>头大了吗?我们现在有4个web，3个app，一共7个前端，请告诉我用你的三层维护起来还好吗？当然，很多时候我们对接app的时候都会使用同一个api接口，算你5个C端吧。5个C端引用同一个业务层，同一个数据层，这时，你的一个逻辑出现了问题，你的一个数据查询出现了问题，Tell me!What would do you do? 我来回答下，我会在业务层修改这个问题，在数据层修改这个问题，然后5个C端发布下，这里还是考虑没有分布式，没有LB的情况哦。Bro， Are u OK？</p><p>你应该明白我的意思了吧，如果你使用SSA的话，你其实只需要更新这个Service，我们的发布也只需要更新这个Service，其他的C端并不需要改动。而且当你的Request和Response参数不变的情况，我们统统不需要重新发布C端。</p><p>SSA 和三层架构的对比：</p><table><thead><tr><th align="center">/</th><th>SSA</th><th>三层架构</th></tr></thead><tbody><tr><td align="center">开发的角度</td><td>注重service端，前后端可完全分离</td><td>全部都要注重，前后端无法完全分离</td></tr><tr><td align="center">部署的角度</td><td>多了一个Service Site</td><td>少一个Service Site</td></tr><tr><td align="center">维护的角度</td><td>如果只改了service，只需要一个发布</td><td>只要改动到业务逻辑层，我必须全部都要发布</td></tr><tr><td align="center">硬件成本的角度</td><td>可能多一台服务器或者一个集群，也可以不用多，多一个站点即可</td><td>维持不变</td></tr><tr><td align="center">人员成本的角度</td><td>自己想吧，老板们</td><td>运维、dba、dev、老板</td></tr></tbody></table><h1 id="SSA的优缺点"><a href="#SSA的优缺点" class="headerlink" title="SSA的优缺点"></a>SSA的优缺点</h1><h2 id="SSA-的优点"><a href="#SSA-的优点" class="headerlink" title="SSA 的优点"></a>SSA 的优点</h2><ul><li>是一个集经典三层架构和微服务架构一身的新型架构。</li><li>适合中小型企业和中小型项目。</li><li>在维护上和微服务架构一样便利。</li><li>在成本上却和三层架构一般。</li><li>不需要EventBus。</li><li>不需要熔断，因为你只有一个。</li><li>在开发上能够快速迭代。</li></ul><h2 id="SSA-的缺点"><a href="#SSA-的缺点" class="headerlink" title="SSA 的缺点"></a>SSA 的缺点</h2><ul><li>依赖度太高，所有依赖都在一个Service上</li><li>IO，因为只有一个，必须考虑到IO，当然也可以集群</li><li>无状态，跟微服务架构一样，service必须无状态</li><li>可能依赖多个DB</li><li>欢迎补充</li></ul><h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>其实还有很多话想说，但很晚了，后面还会继续发文跟大家一起探讨这个架构。</p><p>Po主是一个喜欢天马行空的人，但这一次，Po主正在把它进行实践，而且基础框架已经搭建完成，不久之后将会正式上线经受考验。</p><p>另外Po主需要几位志同道合之士，一同来发展，原本想要一个中级，但现在中级的价码有点高，Po主承受不住啊，欢迎校园刚出来的或者初级，Po主有信心带你们走上.Net Core之路。</p><p>招人：</p><ul><li>会.Net Framework 4.0以上，.Net Core尤佳</li><li>会一种ORM</li><li>懂得什么叫Web Api</li><li>爱好分享，爱好开源，爱好写代码</li><li>月薪10K-20K 论能力</li><li>地点：上海-吴中路<br>我觉得招人启示不用太花俏，大家有相同的理念，投缘即可。不过Po主有一个其他重要的要求，写漂亮的代码，Po是一个见不得Bad Code的人。</li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h1&gt;&lt;p&gt;好久好久没写了，最近刚换了工作，花了几天的时候熟悉了项目，接着就是功能的完善，随后就是对新项目的基础架构搭建。&lt;/p&gt;
+&lt;p</summary>
+      
+    
+    
+    
+    <category term="微服务" scheme="http://www.jamesying.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    
+    
+    <category term="Asp.Net Core" scheme="http://www.jamesying.com/tags/Asp-Net-Core/"/>
+    
+    <category term="Kestrel" scheme="http://www.jamesying.com/tags/Kestrel/"/>
+    
+    <category term=".Net Core" scheme="http://www.jamesying.com/tags/Net-Core/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>.Net Core HttpClient 忽略https证书提醒</title>
+    <link href="http://www.jamesying.com/2019/10/02/ignore-https-warning/"/>
+    <id>http://www.jamesying.com/2019/10/02/ignore-https-warning/</id>
+    <published>2019-10-02T13:04:19.000Z</published>
+    <updated>2020-10-02T13:05:22.330Z</updated>
+    
+    <content type="html"><![CDATA[<p>在测试中经常会遇到请求一些https的url,但又没有本地证书,这时候可以用下面的方法忽略警告</p><pre><code>    var httpclientHandler = new HttpClientHandler();    httpclientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, error) =&gt; true;    var httpClient = new HttpClient(httpclientHandler);</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;在测试中经常会遇到请求一些https的url,但又没有本地证书,这时候可以用下面的方法忽略警告&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    var httpclientHandler = new HttpClientHandler();
+    httpclientHandler</summary>
+      
+    
+    
+    
+    <category term=".Net_Core" scheme="http://www.jamesying.com/categories/Net-Core/"/>
+    
+    
+    <category term=".Net Core" scheme="http://www.jamesying.com/tags/Net-Core/"/>
+    
+  </entry>
+  
+</feed>
