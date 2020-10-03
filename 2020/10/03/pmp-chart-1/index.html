@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Asp.Net Core SignalR 用泛型Hub优雅的调用前端方法及传参 | James&#39;s Blog -- 脑洞的蜂蜜</title>
-  <meta name="keywords" content=" .Net Core , SignalR ">
-  <meta name="description" content="Asp.Net Core SignalR 用泛型Hub优雅的调用前端方法及传参 | James&#39;s Blog -- 脑洞的蜂蜜">
+  <title>James&#39;s Blog -- 脑洞的蜂蜜</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="James&#39;s Blog -- 脑洞的蜂蜜">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="自我介绍  十年的开发经验和项目管理经验，具有较强的编程能力和逻辑分析能力，对.Net， .Net Core, Java有一定的了解和接触。多年的经验，接触过各类的项目架构，单体架构、分布式架构、SOA、微服务架构等等。能够按照项目需求，能够及时对产品进行分析，并分配研发工作。在团队中能做一定的技术指导，对于一些线上问题，都能及时找到解决方案并解决。 先后曾任职于5173、盛大文学、IPS、百强旅">
 <meta property="og:type" content="website">
@@ -394,41 +394,22 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-signalR-core-grace-call-client-methods" class="article article-type-post" itemscope itemprop="blogPost">
-    
-        <h1 class="article-title">Asp.Net Core SignalR 用泛型Hub优雅的调用前端方法及传参</h1>
+        <article id="post-pmp-chart-1" class="article article-type-post" itemscope itemprop="blogPost">
     
     <div class="article-meta">
         
         
         
-        <span class="book">
-            <i class="iconfont icon-category"></i>
-            
-            
-            <a  data-rel=".Net_Core">.Net_Core</a>
-            
-        </span>
-        
-        
-        <span class="tag">
-            <i class="iconfont icon-tag"></i>
-            
-            <a class="color5">.Net Core</a>
-            
-            <a class="color3">SignalR</a>
-            
-        </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2020-09-30 20:28:35'>2020-09-01 15:07</time>
+            发布时间 : <time class="date" title='最后更新: 2020-10-03 13:23:35'>2020-10-03 13:15</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.2k</span>
+        <span>字数:217</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -458,7 +439,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%A7%E7%BB%AD%E5%AD%A6%E4%B9%A0"><span class="toc-text">继续学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%A7%8B%E8%B0%83%E7%94%A8"><span class="toc-text">原始调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E9%9B%85%E8%B0%83%E7%94%A8"><span class="toc-text">优雅调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-text">写在最后</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E9%A1%B9%E7%9B%AE%E7%B3%BB%E7%BB%9F"><span class="toc-text">信息项目系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-text">信息系统项目的特点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E6%95%B4%E4%BD%93%E7%AE%A1%E7%90%86"><span class="toc-text">项目整体管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E7%AB%A0%E7%A8%8B%E7%9A%84%E5%86%85%E5%AE%B9%E5%8F%8A%E4%BD%9C%E7%94%A8"><span class="toc-text">项目章程的内容及作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E5%B9%B2%E7%B3%BB%E4%BA%BA%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="toc-text">项目干系人有哪些</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E8%AE%A1%E5%88%92%E7%9A%84%E5%86%85%E5%AE%B9%EF%BC%8C%E7%BC%96%E5%88%B6%E5%8E%9F%E5%88%99%E5%8F%8A%E8%BF%87%E7%A8%8B"><span class="toc-text">项目管理计划的内容，编制原则及过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E5%AF%BC%E5%92%8C%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E5%B7%A5%E4%BD%9C%E7%9A%84%E5%86%85%E5%AE%B9"><span class="toc-text">指导和管理项目工作的内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%B6%E5%AE%9A%E8%AE%A1%E5%88%92%E5%92%8C%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">制定计划和执行过程中常见的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E6%96%B9%E9%9D%A2%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%88%E4%BB%8E%E6%95%B4%E4%BD%93%E4%B8%8A%E6%9D%A5%E8%80%83%E8%99%91%EF%BC%89"><span class="toc-text">项目管理方面存在的问题（从整体上来考虑）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E5%8F%98%E6%9B%B4%E6%8E%A7%E5%88%B6"><span class="toc-text">项目变更控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E6%94%B6%E5%B0%BE"><span class="toc-text">项目收尾</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -475,78 +456,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="继续学习"><a href="#继续学习" class="headerlink" title="继续学习"></a>继续学习</h2><p>最近一直在使用Asp.Net Core SignalR(下面成SignalR Core)为小程序提供websocket支持,前端时间也发了一个<a target="_blank" rel="noopener" href="https://www.cnblogs.com/inday/p/signalr-wechat-miniapp.html">学习笔记</a>，在使用过程中稍微看了下它的源码,不得不说微软现在真的强大,很多事情都帮你考虑到了,比如使用Redis,使用Redis后,你的websocket就支持横向扩展了,使用的方式也特别简单,只需要在<code>services.AddSignalR</code>的后面再加上:</p>
-<pre><code>.AddRedis(options =&gt;
-&#123;
-    options.Configuration.ConnectTimeout = 30;
-    options.Configuration.EndPoints.Add(&quot;redis ip&quot;);
-&#125;)</code></pre>
-<p>SignalR Core利用了Redis的发布订阅功能,就实现了横向扩展,再也不用担心一台ws服务器不够用了.</p>
-<p>今天要说的并不是SignalR Core的负载均衡方式,而是如何优雅的调用前端方法。大家都知道SignalR Core除了可以建立websocket连接，还能双向调用，服务器调用客户端方法，客户端也能调用服务器的方法。</p>
-<h2 id="原始调用"><a href="#原始调用" class="headerlink" title="原始调用"></a>原始调用</h2><p>我们看下如何调用客户端方法：</p>
-<pre><code>public class ChatHub : Hub
-&#123;
-    //服务端方法
-    public async Task SendMessage(string user, string message)
-    &#123;
-        //ReceiveMessage 为客户端方法，让所有客户端调用这个方法
-        await Clients.All.SendAsync(&quot;sayHello&quot;, user, message);
-    &#125;
-&#125;</code></pre>
-<p>还是ChatHub<del>~</del></p>
-<p>我们可以看到在这里我们调用了客户端的sayHello,并传递了两个字符串参数user,message,是不是觉得丑陋,说实在的真心看不下去哈。而且不变维护，相当于你要把方法名硬编码，传递多少个参数也没有个准，没有好的文档后期很难维护。好在微软已经为我们考虑到了这个情况，我们可以把客户端的方法用接口的方法定义了！！！对！没错，用接口的方式定义客户端的方法！！</p>
-<h2 id="优雅调用"><a href="#优雅调用" class="headerlink" title="优雅调用"></a>优雅调用</h2><p>使用的方式也超级简单，我们先定义一个客户端的接口：</p>
-<pre><code>public interface IMyClient
-&#123;
-    Task SayHello(string user, string message);
-&#125;</code></pre>
-<p>然后我们的Hub集成Hub<T>，T就是你定义的客户端接口，这里也就是IMyClient，我用上面的ChatHub举例：</p>
-<pre><code>public class SendMessageHub : Hub&lt;IMyClient&gt;
-&#123;
-    public async Task SendMessage(string user, string message)
-    &#123;
-        await this.Clients.All.SayHello(user, &quot;from server:&quot; + message);
-        //ReceiveMessage 为客户端方法，让所有客户端调用这个方法
-        //await Clients.All.SendAsync(&quot;sayHello&quot;, user, message);
-    &#125;
-&#125;</code></pre>
-<p>注释掉的是我之前的方式，SayHello是客户端的方法，会通过websocket传递到前端，下图为我用小程序通讯产生的结果：<br><img src="https://github.com/JamesYing/mpdevclass/blob/master/blogs/20180906215111.png?raw=true" alt="image"><br>是不是SoEasy？？我觉得还不算完，我们参数目前是按照数组的方式传递的，如果有限定的参数名就完美了，我们改造下IMyClient：</p>
-<pre><code>public interface IMyClient
-&#123;
-    Task SayHello(HelloMessage message);
-&#125;
-
-public class HelloMessage
-&#123;
-    public string User &#123; get; set; &#125;
-    public string Message &#123; get; set; &#125;
-&#125;</code></pre>
-<p>修改下我们的Hub的SendMessage方法：</p>
-<pre><code>public  Task SendMessage(string user, string message)
-&#123;
-    return this.Clients.All.SayHello(new HelloMessage()
-    &#123;
-        User = user,
-        Message = &quot;from server:&quot; + message
-    &#125;);
-
-    //return this.Clients.All.SendAsync(&quot;sayHello&quot;, $&quot;from server:&#123;message&#125;&quot;);
-&#125;</code></pre>
-<p>在运行下我们的小程序：<br><img src="https://github.com/JamesYing/mpdevclass/blob/master/blogs/20180906220201.png?raw=true" alt="image"><br>LooK，方法名没有改变，但是我们返回的参数成了一个对象，如果看过我之前<a target="_blank" rel="noopener" href="https://www.cnblogs.com/inday/p/signalr-wechat-miniapp.html">那篇博文</a>的话，应该记得在前端的时候，我需要做一个映射，来调用前端的方法，在映射中，我参数使用的是数组进行传递的，现在不需要去看数组中第几个参数是我需要使用的了，你完全可以使用：</p>
-<pre><code>callMethods(methods, args) &#123;
-    console.log(methods, args);
-    let self = this;
-    let arg = args[0];
-    switch (methods) &#123;
-        case &#39;SayHello&#39;:
-            self.sayHello(arg.message);
-            break;
-    &#125;
-&#125;,</code></pre>
-<p>这里还有个问题，就是接口中的方法名是大写开头的，而js的规范呢一般都是小写开头的，所以在映射方法的时候需要注意下，反正这个大小写问题有点不是很爽，参数在传递的时候倒是直接转换成首字母小写，我相信SignalR Core是可以实现的，只是我不知道而已，稍后在研究研究，如果可行，我会更新此篇博文。如果你要在接口中用小写来定义这个方法，也没有问题，但我觉得就是不符合规范，习惯不允许我如此粗糙，哈哈。</p>
-<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>至于调用的原理，我没有细看，正好在看源码的时候，看到了Hub<T>，很疑惑，尝试了下后才发觉SignalR的牛逼，后来发现其实在SignalR 2.1中引用了这个概念，估计很多人已经在用了，但好像提到的人很少，包括微软的文档，这次也是意外发现，赶快记录下来，希望对您有用。</p>
-<p>Asp.Net Core SignalR确实很强大，有兴趣的可以去<a target="_blank" rel="noopener" href="https://github.com/aspnet/SignalR">gayhub</a>上去研究下他们的源码。</p>
-
+        <h2 id="信息项目系统"><a href="#信息项目系统" class="headerlink" title="信息项目系统"></a>信息项目系统</h2><h3 id="信息系统项目的特点"><a href="#信息系统项目的特点" class="headerlink" title="信息系统项目的特点"></a>信息系统项目的特点</h3><ol>
+<li>目标不明确</li>
+<li>需求变化频繁</li>
+<li>智力密集型</li>
+<li>设计队伍庞大</li>
+<li>设计人员高度专业化</li>
+<li>设计的承包商多</li>
+<li>各级承包商分布在各地，相互联系复杂</li>
+<li>系统集成项目中需研制开发大量的软硬件系统</li>
+<li>项目生命周期通常较短</li>
+<li>通常要采用大量的新技术</li>
+<li>使用与维护的要求非常复杂</li>
+</ol>
+<h2 id="项目整体管理"><a href="#项目整体管理" class="headerlink" title="项目整体管理"></a>项目整体管理</h2><h3 id="项目章程的内容及作用"><a href="#项目章程的内容及作用" class="headerlink" title="项目章程的内容及作用"></a>项目章程的内容及作用</h3><h3 id="项目干系人有哪些"><a href="#项目干系人有哪些" class="headerlink" title="项目干系人有哪些"></a>项目干系人有哪些</h3><h3 id="项目管理计划的内容，编制原则及过程"><a href="#项目管理计划的内容，编制原则及过程" class="headerlink" title="项目管理计划的内容，编制原则及过程"></a>项目管理计划的内容，编制原则及过程</h3><h3 id="指导和管理项目工作的内容"><a href="#指导和管理项目工作的内容" class="headerlink" title="指导和管理项目工作的内容"></a>指导和管理项目工作的内容</h3><h3 id="制定计划和执行过程中常见的问题"><a href="#制定计划和执行过程中常见的问题" class="headerlink" title="制定计划和执行过程中常见的问题"></a>制定计划和执行过程中常见的问题</h3><h3 id="项目管理方面存在的问题（从整体上来考虑）"><a href="#项目管理方面存在的问题（从整体上来考虑）" class="headerlink" title="项目管理方面存在的问题（从整体上来考虑）"></a>项目管理方面存在的问题（从整体上来考虑）</h3><h3 id="项目变更控制"><a href="#项目变更控制" class="headerlink" title="项目变更控制"></a>项目变更控制</h3><h3 id="项目收尾"><a href="#项目收尾" class="headerlink" title="项目收尾"></a>项目收尾</h3>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 james@taogame.com </span>
     </div>
@@ -559,12 +482,12 @@ public class HelloMessage
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>Asp.Net Core SignalR 用泛型Hub优雅的调用前端方法及传参</p>
-    <p><span class="copy-title">字数:</span><span class="post-count">1.2k</span></p>
+    <p><span class="copy-title">文章标题:</span></p>
+    <p><span class="copy-title">字数:</span><span class="post-count">217</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="脑洞的蜂蜜">脑洞的蜂蜜</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-09-01, 15:07:23</p>
-    <p><span class="copy-title">最后更新:</span>2020-09-30, 20:28:35</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/09/01/signalR-core-grace-call-client-methods/" title="Asp.Net Core SignalR 用泛型Hub优雅的调用前端方法及传参">http://www.jamesying.com/2020/09/01/signalR-core-grace-call-client-methods/</a>
+    <p><span class="copy-title">发布时间:</span>2020-10-03, 13:15:37</p>
+    <p><span class="copy-title">最后更新:</span>2020-10-03, 13:23:35</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/10/03/pmp-chart-1/" title="">http://www.jamesying.com/2020/10/03/pmp-chart-1/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#34;署名-非商用-相同方式共享 4.0&#34;</a> 转载请保留原文链接及作者。
     </p>
