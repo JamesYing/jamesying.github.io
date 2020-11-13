@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>单体服务架构-一种新型的适合中小型企业的服务架构 | James&#39;s Blog -- 脑洞的蜂蜜</title>
-  <meta name="keywords" content=" Asp.Net Core , Kestrel , .Net Core ">
-  <meta name="description" content="单体服务架构-一种新型的适合中小型企业的服务架构 | James&#39;s Blog -- 脑洞的蜂蜜">
+  <title>生活即将进入一个新的阶段 | James&#39;s Blog -- 脑洞的蜂蜜</title>
+  <meta name="keywords" content=" 生活 ">
+  <meta name="description" content="生活即将进入一个新的阶段 | James&#39;s Blog -- 脑洞的蜂蜜">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="自我介绍  十年的开发经验和项目管理经验，具有较强的编程能力和逻辑分析能力，对.Net， .Net Core, Java有一定的了解和接触。多年的经验，接触过各类的项目架构，单体架构、分布式架构、SOA、微服务架构等等。能够按照项目需求，能够及时对产品进行分析，并分配研发工作。在团队中能做一定的技术指导，对于一些线上问题，都能及时找到解决方案并解决。 先后曾任职于5173、盛大文学、IPS、百强旅">
 <meta property="og:type" content="website">
@@ -402,9 +402,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-Single-Service-Architecture-Intro" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-life-2020-11-13" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">单体服务架构-一种新型的适合中小型企业的服务架构</h1>
+        <h1 class="article-title">生活即将进入一个新的阶段</h1>
     
     <div class="article-meta">
         
@@ -414,7 +414,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="微服务">微服务</a>
+            <a  data-rel="日常生活">日常生活</a>
             
         </span>
         
@@ -422,23 +422,19 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color3">Asp.Net Core</a>
-            
-            <a class="color3">Kestrel</a>
-            
-            <a class="color5">.Net Core</a>
+            <a class="color3">生活</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2020-09-30 20:28:35'>2020-04-30 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2020-11-13 19:47:46'>2020-11-13 19:00</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:2.1k</span>
+        <span>字数:535</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -468,7 +464,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%8D%95%E4%BD%93%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84"><span class="toc-text">什么是单体服务架构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%8D%95%E4%BD%93%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84"><span class="toc-text">为什么需要单体服务架构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SSA-VS-%E4%B8%89%E5%B1%82%E6%9E%B6%E6%9E%84"><span class="toc-text">SSA VS 三层架构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SSA%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-text">SSA的优缺点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SSA-%E7%9A%84%E4%BC%98%E7%82%B9"><span class="toc-text">SSA 的优点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SSA-%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="toc-text">SSA 的缺点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-text">写在最后</span></a></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -485,87 +481,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>好久好久没写了，最近刚换了工作，花了几天的时候熟悉了项目，接着就是功能的完善，随后就是对新项目的基础架构搭建。</p>
-<p>看过Po主博客的都知道，Po主一直致力于推广.Net Core在微服务架构上的实践，包括从去年年底开始也正在写一本关于此类的书（目前还在写的阶段，不便公布）。换新东家的目的也是如此，公司是个集团公司，但楼主负责的项目还不是很大，So，微服务架构可能现阶段还无法实现。</p>
-<p>但Po主一心向往微服务架构，所以我在搭建基础架构的时候，想到了一种过度架构方式，也不知道如何称呼，随心所欲称之为：单体服务架构（Single Service Architecture-简称SSA）</p>
-<h1 id="什么是单体服务架构"><a href="#什么是单体服务架构" class="headerlink" title="什么是单体服务架构"></a>什么是单体服务架构</h1><p>什么是单体服务架构呢？总的来说，架构看上去类似于微服务架构，但它只包含了一个服务，我们的业务逻辑统统放到这一个服务来，简单画个图：<br><img src="https://github.com/JamesYing/jamesying.github.io/blob/master/img/201804/ssa-01.png?raw=true" alt="image"></p>
-<p>怎么样，简单吧，我们来对比下eShop的架构图：<br><img src="https://user-images.githubusercontent.com/1712635/38758862-d4b42498-3f27-11e8-8dad-db60b0fa05d3.png" alt="image"></p>
-<p>如何，看出什么了吗？我们的架构去除了Api gateway，去除了EventBus，把各个服务结合在了一起，形成了一个单一的服务，所以我称它为单体服务架构。</p>
-<h1 id="为什么需要单体服务架构"><a href="#为什么需要单体服务架构" class="headerlink" title="为什么需要单体服务架构"></a>为什么需要单体服务架构</h1><p>可能大家好奇，为什么需要单体服务架构（后称SSA）呢？如果大家了解过微服务架构的话，应该听说过康威定理吧，或者说听说过“微服务架构不是银弹”类似的话吧，概论就是并不是所有企业所有项目都适合微服务架构。但在技术热潮之中，中小型企业都想加入微服务的队列，但如何是好呢？我想SSA可能是他们在完成微服务架构之前最好的选择吧。</p>
-<p>Po主在设计新项目之前，也一直困惑，如何为以后的微服务做准备呢？新东家是一家集团公司，业务体系庞大，团队开发语言也是众多，就近一个月的观察来看，运维、开发、维护的成本相当高，未来走向微服务架构是必然的，而且公司找Po主来的目的也是如此。</p>
-<p>正如之前所说，目前Po主负责的项目比较小，投入的资源也不是很大，Po在经过前期调研之后，觉得目前并不适合做成微服务架构，经过几天的思量，Po主想到了SSA，去除了很多复杂性，但保留了微服务架构的可扩展，可维护性，也为以后转型做准备。</p>
-<p>从SSA的架构图中，你可以清晰的看到，我们有很多的clients，正是因为如此，所以我们需要SSA，如果你的项目只有一个Web，那简单的三层架构就足矣。在SSA中，我们的Inside Api Management为我们的clients提供了所需的Api，类似于Api Gateway，但包含了我们所有的业务逻辑。在SSA中，你可以像微服务架构一样，抛弃数据层，当然我是不建议这样，你可以使用封装好的SqlClient或者Orm框架来协助，结合IUnitOfWork和Repository模式，这样你的数据访问就会变得很简单了。</p>
-<h1 id="SSA-VS-三层架构"><a href="#SSA-VS-三层架构" class="headerlink" title="SSA VS 三层架构"></a>SSA VS 三层架构</h1><p>可能你会问，为何不用三层架构呢？而且你的架构跟三层架构很像。</p>
-<p>没错，Po主的想法其实就是把三层架构中的业务逻辑层给提取了出来，把业务逻辑封装起来，并提供标准化的Api接口为其他Clients提供业务或数据。</p>
-<p>但为何选择SSA而不是三层架构呢？</p>
-<p>相信这里几乎所有的开发者都使用过三层架构开发，C端引用我们的逻辑层，逻辑层引用数据层，ok，这是因为我们只需要考虑到一个C端。就拿新闻系统举例，一开始你需要的只是展示新闻内容，一个前端Web足矣，我们叫Web1。但为了维护，我们需要一个后台管理，我们叫Web2，这时候已经以后2个C端了，这时候，你可以新建一个web项目，引用之前的业务层。可随着业务发展，公司需求一个手机H5的站点，我们叫web3，这时候你会再建一个项目，使用一些前端的框架的SPA项目，然后和web2一样，引用之前的业务层。</p>
-<p>好了，现在你有3个C端了，我想想，大概1个中级的开发应该能够应付，如果，我说如果，你的这个维护人员离职了，呵呵，我相信没有一定经验的是接手不了项目，至少在短期内无法适应。</p>
-<p>我们继续，公司要求需要一个适应微信端的H5，我们叫web4， 一个小程序，我们叫wxapp， 一个安卓：androidApp， 一个苹果：iosApp。<br><img src="http://img5q.duitang.com/uploads/item/201501/23/20150123223822_wXdQx.thumb.700_0.gif" alt="image"></p>
-<p>头大了吗?我们现在有4个web，3个app，一共7个前端，请告诉我用你的三层维护起来还好吗？当然，很多时候我们对接app的时候都会使用同一个api接口，算你5个C端吧。5个C端引用同一个业务层，同一个数据层，这时，你的一个逻辑出现了问题，你的一个数据查询出现了问题，Tell me!What would do you do? 我来回答下，我会在业务层修改这个问题，在数据层修改这个问题，然后5个C端发布下，这里还是考虑没有分布式，没有LB的情况哦。Bro， Are u OK？</p>
-<p>你应该明白我的意思了吧，如果你使用SSA的话，你其实只需要更新这个Service，我们的发布也只需要更新这个Service，其他的C端并不需要改动。而且当你的Request和Response参数不变的情况，我们统统不需要重新发布C端。</p>
-<p>SSA 和三层架构的对比：</p>
-<table>
-<thead>
-<tr>
-<th align="center">/</th>
-<th>SSA</th>
-<th>三层架构</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">开发的角度</td>
-<td>注重service端，前后端可完全分离</td>
-<td>全部都要注重，前后端无法完全分离</td>
-</tr>
-<tr>
-<td align="center">部署的角度</td>
-<td>多了一个Service Site</td>
-<td>少一个Service Site</td>
-</tr>
-<tr>
-<td align="center">维护的角度</td>
-<td>如果只改了service，只需要一个发布</td>
-<td>只要改动到业务逻辑层，我必须全部都要发布</td>
-</tr>
-<tr>
-<td align="center">硬件成本的角度</td>
-<td>可能多一台服务器或者一个集群，也可以不用多，多一个站点即可</td>
-<td>维持不变</td>
-</tr>
-<tr>
-<td align="center">人员成本的角度</td>
-<td>自己想吧，老板们</td>
-<td>运维、dba、dev、老板</td>
-</tr>
-</tbody></table>
-<h1 id="SSA的优缺点"><a href="#SSA的优缺点" class="headerlink" title="SSA的优缺点"></a>SSA的优缺点</h1><h2 id="SSA-的优点"><a href="#SSA-的优点" class="headerlink" title="SSA 的优点"></a>SSA 的优点</h2><ul>
-<li>是一个集经典三层架构和微服务架构一身的新型架构。</li>
-<li>适合中小型企业和中小型项目。</li>
-<li>在维护上和微服务架构一样便利。</li>
-<li>在成本上却和三层架构一般。</li>
-<li>不需要EventBus。</li>
-<li>不需要熔断，因为你只有一个。</li>
-<li>在开发上能够快速迭代。</li>
-</ul>
-<h2 id="SSA-的缺点"><a href="#SSA-的缺点" class="headerlink" title="SSA 的缺点"></a>SSA 的缺点</h2><ul>
-<li>依赖度太高，所有依赖都在一个Service上</li>
-<li>IO，因为只有一个，必须考虑到IO，当然也可以集群</li>
-<li>无状态，跟微服务架构一样，service必须无状态</li>
-<li>可能依赖多个DB</li>
-<li>欢迎补充</li>
-</ul>
-<h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>其实还有很多话想说，但很晚了，后面还会继续发文跟大家一起探讨这个架构。</p>
-<p>Po主是一个喜欢天马行空的人，但这一次，Po主正在把它进行实践，而且基础框架已经搭建完成，不久之后将会正式上线经受考验。</p>
-<p>另外Po主需要几位志同道合之士，一同来发展，原本想要一个中级，但现在中级的价码有点高，Po主承受不住啊，欢迎校园刚出来的或者初级，Po主有信心带你们走上.Net Core之路。</p>
-<p>招人：</p>
-<ul>
-<li>会.Net Framework 4.0以上，.Net Core尤佳</li>
-<li>会一种ORM</li>
-<li>懂得什么叫Web Api</li>
-<li>爱好分享，爱好开源，爱好写代码</li>
-<li>月薪10K-20K 论能力</li>
-<li>地点：上海-吴中路<br>我觉得招人启示不用太花俏，大家有相同的理念，投缘即可。不过Po主有一个其他重要的要求，写漂亮的代码，Po是一个见不得Bad Code的人。</li>
-</ul>
+        <p>10月30日下午 17点24分，爷爷还是离开了我们，看着亲人在眼前离开，说不清什么味道。这天因为我爸的事情，我下午请了假，所以我是孙子辈里第一个去看他的，那时候虽然他没说话，但我知道他能听到我，知道我来了。</p>
+<p>那天我说了很多，想起了小时候，小时候觉得爷爷一直针对我，不喜欢我，所以长大了我没怎么关心过他，但当得知他的病时，我却一下子感觉悲伤，感觉自己的不孝，这或许就是血浓于水吧。<br>他这个病其实很难受，但从头到底他都不吭一声，或许他真的没有力气吭声了吧。回家后，奶奶一开始没怎么样，但突然一下子哭了起来，那种哭就像小姑娘一样，奶奶和爷爷这辈子从10几岁开始一直在一起，<br>从没分开过，奶奶因为没有文化，平时也不跟爷爷吵架，只会呵呵，呵呵的笑，爷爷呢对奶奶也非常好，什么都会想着奶奶。或许爷爷没等待奶奶来，可能会有些遗憾吧！</p>
+<p>我爸呢终于清醒了，知道自己上了当，总算保住了最后几万块钱，感谢社区民警的方法，在爷爷的葬礼后，带着老爸去了派出所报了案，至于能否追回，我从没奢望过，只要老爸知道这其实都是骗局就可以了。</p>
+<p>最后，我终于离开了华住，离开了盟广，离开了原本我想奋斗的地方！太多太多的遗憾在这里，太多太多的失望也在这里，为了自己的将来，我必须要迈出这一步！新公司虽然也很忙，但我知道这里可能会实现自己的成长，为自己的转型做铺垫！</p>
+<p>2020对属狗的不怎么友好，我属狗，爷爷属狗，但我知道接下来，我将会以崭新的自己迎接2021，迎接以后，加油吧！</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 james@taogame.com </span>
@@ -579,12 +499,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>单体服务架构-一种新型的适合中小型企业的服务架构</p>
-    <p><span class="copy-title">字数:</span><span class="post-count">2.1k</span></p>
+    <p><span class="copy-title">文章标题:</span>生活即将进入一个新的阶段</p>
+    <p><span class="copy-title">字数:</span><span class="post-count">535</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="脑洞的蜂蜜">脑洞的蜂蜜</a></p>
-    <p><span class="copy-title">发布时间:</span>2020-04-30, 00:00:00</p>
-    <p><span class="copy-title">最后更新:</span>2020-09-30, 20:28:35</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/04/30/Single-Service-Architecture-Intro/" title="单体服务架构-一种新型的适合中小型企业的服务架构">http://www.jamesying.com/2020/04/30/Single-Service-Architecture-Intro/</a>
+    <p><span class="copy-title">发布时间:</span>2020-11-13, 19:00:00</p>
+    <p><span class="copy-title">最后更新:</span>2020-11-13, 19:47:46</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/11/13/life-2020-11-13/" title="生活即将进入一个新的阶段">http://www.jamesying.com/2020/11/13/life-2020-11-13/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#34;署名-非商用-相同方式共享 4.0&#34;</a> 转载请保留原文链接及作者。
     </p>
